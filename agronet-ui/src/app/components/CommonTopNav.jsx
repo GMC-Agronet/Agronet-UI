@@ -1,21 +1,20 @@
-'use client';
-
-import React from 'react';
+import React, {useState} from 'react';
 import { Box, IconButton } from '@mui/material';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import Image from 'next/image';
-import PromoSlider from '@/app/components/PromoSlider';
-import ButtomNavBar from '@/app/components/BottomNavBar';
-import CategorySelection from '@/app/components/CategorySelection';
-import CropSelection from '@/app/components/CropSelection';
-import TopSellingProducts from '@/app/components/TopSellingProducts';
 import LandingPageSearchBar from '@/app/components/LandingPageSearchBar';
+import SideNav from '@/app/components/SideNav';
+import MenuRoundedIcon from '@mui/icons-material/MenuRounded';
+import { useRouter } from 'next/navigation'; 
 
-export default function Dashboard() {
-  return (
-    <Box sx={{ bgcolor: '#f5f5f5', minHeight: '100vh', pb: 8 }}>
-      <Box
+
+const CommonTopNav = () => {
+  const [isSidebarOpen, setSidebarOpen] = useState(false);
+  const router = useRouter(); 
+
+
+    return <Box
         sx={{
           bgcolor: 'secondary.main',
           color: 'white',
@@ -33,6 +32,7 @@ export default function Dashboard() {
               alt="GMC AgroNet Logo"
               width={120}
               height={40}
+              onClick={() => router.push('/dashboard')}
             />
           </Box>
           <Box display="flex" alignItems="center" gap={2}>
@@ -42,16 +42,14 @@ export default function Dashboard() {
             <IconButton color="inherit">
               <ShoppingCartIcon />
             </IconButton>
+            <IconButton color="inherit" onClick={() => setSidebarOpen(true)} >
+              <MenuRoundedIcon />
+            </IconButton>
           </Box>
         </Box>
         <LandingPageSearchBar />
+        <SideNav isOpen={isSidebarOpen} onClose={() => setSidebarOpen(false)} />
       </Box>
+    }
 
-      <CategorySelection />
-      {/* <CropSelection /> */}
-      <PromoSlider />
-      <TopSellingProducts />
-      <ButtomNavBar />
-    </Box>
-  );
-}
+export default CommonTopNav;

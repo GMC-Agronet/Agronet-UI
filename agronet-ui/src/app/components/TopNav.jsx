@@ -2,11 +2,11 @@ import { AppBar, Toolbar, IconButton, Typography } from '@mui/material';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import SideNav from '@/app/components/SideNav';
 import { useState } from 'react';
-import { useRouter } from 'next/navigation'; // Import Next.js router
+import { useRouter } from 'next/navigation'; 
 
 export default function TopNav() {
   const [isSidebarOpen, setSidebarOpen] = useState(false);
-  const router = useRouter(); // Initialize router
+  const router = useRouter(); 
 
   return (
     <>
