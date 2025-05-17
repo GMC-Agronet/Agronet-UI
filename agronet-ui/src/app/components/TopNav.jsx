@@ -10,7 +10,7 @@ export default function TopNav() {
 
   return (
     <>
-      <AppBar position="static" className="bg-secondary" color="secondary">
+      <AppBar position="static" className="bg-primary" color="secondary">
         <Toolbar>
           <Typography
             variant="h6" 

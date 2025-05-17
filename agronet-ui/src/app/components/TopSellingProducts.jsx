@@ -4,6 +4,7 @@ import ProductCard from '@/app/products/page';
 
 const topSellingProducts = [
   {
+    id: 1,
     image: '/assets/images/inputs/wheatseeds.png',
     title: 'Wheat Seeds',
     price: 450,
@@ -11,6 +12,7 @@ const topSellingProducts = [
     discount: '10% off',
   },
   {
+    id: 2,
     image: '/assets/images/inputs/organic.png',
     title: 'Organic Fertilizer',
     price: 350,
@@ -18,6 +20,7 @@ const topSellingProducts = [
     discount: '5% off',
   },
   {
+    id: 3,
     image: '/assets/images/inputs/drip.png',
     title: 'Drip Irrigation Kit',
     price: 1200,

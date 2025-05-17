@@ -17,12 +17,20 @@ const mockProductDetails = {
   },
   2: {
     id: 2,
-    image: '/assets/images/fertilizer.png',
+    image: '/assets/images/seeds.png',
     title: 'Fertilizer',
     price: 200,
     unit: 'bag',
     discount: '15% Off',
     description: 'Premium fertilizer for healthy crops.',
+  },
+  3: {
+    id: 3,
+    image: '/assets/images/inputs/drip.png',
+    title: 'Drip Irrigation Kit',
+    price: 1200,
+    unit: 'per set',
+    discount: '8% off',
   },
 };
 
@@ -35,9 +43,9 @@ export default function ProductDetailsPage() {
   }
 
   return (
-    <Box p={2} minHeight="100vh" bgcolor="background.default">
+    <Box minHeight="100vh" bgcolor="background.default">
       <CommonTopNav />
-      <Grid container spacing={4} mt={4}>
+      <Grid container spacing={4} p={4}>
         <Grid item xs={12} sm={6}>
           <Image
             src={product.image}

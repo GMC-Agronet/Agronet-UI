@@ -68,6 +68,7 @@ export default function CategoryItemsPage() {
         {items.map((item) => (
           <Grid item xs={12} sm={6} md={4} key={item.id}>
             <ProductCard
+              id={item.id}
               image={item.image}
               title={item.title}
               price={item.price}

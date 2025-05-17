@@ -17,7 +17,7 @@ export default function Dashboard() {
     <Box sx={{ bgcolor: '#f5f5f5', minHeight: '100vh', pb: 8 }}>
       <Box
         sx={{
-          bgcolor: 'secondary.main',
+          bgcolor: 'primary.main',
           color: 'white',
           borderBottomLeftRadius: 32,
           borderBottomRightRadius: 32,

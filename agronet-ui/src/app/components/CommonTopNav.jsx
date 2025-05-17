@@ -16,7 +16,7 @@ const CommonTopNav = () => {
 
     return <Box
         sx={{
-          bgcolor: 'secondary.main',
+          bgcolor: 'primary.main',
           color: 'white',
           borderBottomLeftRadius: 32,
           borderBottomRightRadius: 32,

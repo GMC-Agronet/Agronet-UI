@@ -9,7 +9,7 @@ export default function CategoryTile({ name, image, action }) {
         sx={{
           width: '80%', // Make the width responsive to fit the grid
           maxWidth: '180px', // Set a maximum width for consistency
-          height: '180px',
+          height: '150px',
           bgcolor: 'gray.200',
           borderRadius: 2,
           overflow: 'hidden',

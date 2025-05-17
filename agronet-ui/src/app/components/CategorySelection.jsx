@@ -22,14 +22,14 @@ const CategorySelection = () => {
         <Grid item key={idx} sx={{ width: '100%' }}>
           <Paper
             sx={{
-              height: 120,
+              height: 90,
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'center',
               justifyContent: 'center',
               p: 1,
               textAlign: 'center',
-              borderRadius: 3,
+              borderRadius: 40,
               cursor: 'pointer', 
             }}
             onClick={() => handleCategoryClick(card.action)} 
@@ -37,12 +37,13 @@ const CategorySelection = () => {
             <Box
               component="img"
               src={card.img}
-              sx={{ width: 150, height: 90, objectFit: 'contain', mb: 1 }}
+              sx={{ width: 150, height: 120, objectFit: 'contain', mb: 1 }}
             />
-            <Typography variant="subtitle2" fontWeight="bold" color="primary">
+            
+          </Paper>
+          <Typography variant="subtitle2" fontWeight="bold" color="primary" align="center" mt={1}>
               {card.label}
             </Typography>
-          </Paper>
         </Grid>
       ))}
     </Grid>
