@@ -4,50 +4,16 @@ import { useParams } from 'next/navigation';
 import { Box, Grid, Typography } from '@mui/material';
 import ProductCard from '@/app/components/ProductCard';
 import CommonTopNav from '@/app/components/CommonTopNav';
-
-const mockCategoryItems = {
-  herbicides: [
-    {
-      id: 1,
-      image: '/assets/images/seeds.png',
-      title: 'Seeds',
-      price: 100,
-      unit: 'kg',
-      discount: '10% Off',
-    },
-    {
-      id: 2,
-      image: '/assets/images/seeds.png',
-      title: 'Fertilizer',
-      price: 200,
-      unit: 'bag',
-      discount: '15% Off',
-    },
-  ],
-  produce: [
-    {
-      id: 1,
-      image: '/assets/images/rice.png',
-      title: 'Rice',
-      price: 50,
-      unit: 'kg',
-      discount: '5% Off',
-    },
-    {
-      id: 2,
-      image: '/assets/images/wheatseeds.png',
-      title: 'Wheat',
-      price: 60,
-      unit: 'kg',
-      discount: '8% Off',
-    },
-  ],
-};
+import productsData from '../../mock/products.json';
 
 export default function CategoryItemsPage() {
-  const { category } = useParams(); // Extract category from the dynamic route
-
-  const items = mockCategoryItems[category] || [];
+  const { category } = useParams();
+  const normalizedCategory = category?.toLowerCase();
+  // Filter products by category attribute
+  const items = productsData.filter(
+    (item) =>
+      item.category && item.category.toLowerCase() === normalizedCategory,
+  );
 
   return (
     <Box p={0} minHeight="100vh" bgcolor="background.default">

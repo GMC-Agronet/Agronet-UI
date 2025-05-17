@@ -1,0 +1,202 @@
+[
+  {
+    "id": 1,
+    "category": "herbicides",
+    "image": "/assets/images/seeds.png",
+    "title": "Seeds",
+    "price": 100,
+    "unit": "kg",
+    "discount": "10% Off",
+    "description": "High-quality seeds for better yield."
+  },
+  {
+    "id": 2,
+    "category": "herbicides",
+    "image": "/assets/images/seeds.png",
+    "title": "Fertilizer",
+    "price": 200,
+    "unit": "bag",
+    "discount": "15% Off",
+    "description": "Premium fertilizer for healthy crops."
+  },
+  {
+    "id": 3,
+    "category": "herbicides",
+    "image": "/assets/images/inputs/pesticide.png",
+    "title": "Herbicide Spray",
+    "price": 180,
+    "unit": "bottle",
+    "discount": "7% Off",
+    "description": "Effective weed control."
+  },
+  {
+    "id": 4,
+    "category": "herbicides",
+    "image": "/assets/images/inputs/pesticide.png",
+    "title": "Selective Herbicide",
+    "price": 210,
+    "unit": "bottle",
+    "discount": "8% Off",
+    "description": "Selective weed killer for crops."
+  },
+  {
+    "id": 5,
+    "category": "herbicides",
+    "image": "/assets/images/inputs/pesticide.png",
+    "title": "Pre-emergent Herbicide",
+    "price": 220,
+    "unit": "bottle",
+    "discount": "9% Off",
+    "description": "Prevents weed growth before emergence."
+  },
+  {
+    "id": 6,
+    "category": "fungicides",
+    "image": "/assets/images/inputs/pesticide.png",
+    "title": "Fungicide A",
+    "price": 150,
+    "unit": "bottle",
+    "discount": "10% Off",
+    "description": "Protects crops from fungal diseases."
+  },
+  {
+    "id": 7,
+    "category": "fungicides",
+    "image": "/assets/images/inputs/pesticide.png",
+    "title": "Fungicide B",
+    "price": 160,
+    "unit": "bottle",
+    "discount": "12% Off",
+    "description": "Broad-spectrum fungicide."
+  },
+  {
+    "id": 8,
+    "category": "fungicides",
+    "image": "/assets/images/inputs/pesticide.png",
+    "title": "Fungicide C",
+    "price": 170,
+    "unit": "bottle",
+    "discount": "8% Off",
+    "description": "Systemic fungicide for crops."
+  },
+  {
+    "id": 9,
+    "category": "fungicides",
+    "image": "/assets/images/inputs/pesticide.png",
+    "title": "Fungicide D",
+    "price": 180,
+    "unit": "bottle",
+    "discount": "11% Off",
+    "description": "Contact fungicide for leaves."
+  },
+  {
+    "id": 10,
+    "category": "fungicides",
+    "image": "/assets/images/inputs/pesticide.png",
+    "title": "Fungicide E",
+    "price": 190,
+    "unit": "bottle",
+    "discount": "9% Off",
+    "description": "Fungicide for fruit crops."
+  },
+  {
+    "id": 11,
+    "category": "fertilizers",
+    "image": "/assets/images/inputs/fertilizer.png",
+    "title": "Organic Fertilizer",
+    "price": 250,
+    "unit": "bag",
+    "discount": "12% Off",
+    "description": "Eco-friendly organic fertilizer."
+  },
+  {
+    "id": 12,
+    "category": "fertilizers",
+    "image": "/assets/images/inputs/fertilizer.png",
+    "title": "Nitrogen Fertilizer",
+    "price": 210,
+    "unit": "bag",
+    "discount": "9% Off",
+    "description": "Nitrogen-rich fertilizer."
+  },
+  {
+    "id": 13,
+    "category": "fertilizers",
+    "image": "/assets/images/inputs/fertilizer.png",
+    "title": "Phosphate Fertilizer",
+    "price": 240,
+    "unit": "bag",
+    "discount": "10% Off",
+    "description": "Phosphate-rich fertilizer."
+  },
+  {
+    "id": 14,
+    "category": "fertilizers",
+    "image": "/assets/images/inputs/fertilizer.png",
+    "title": "Potash Fertilizer",
+    "price": 230,
+    "unit": "bag",
+    "discount": "11% Off",
+    "description": "Potash-rich fertilizer."
+  },
+  {
+    "id": 15,
+    "category": "fertilizers",
+    "image": "/assets/images/inputs/fertilizer.png",
+    "title": "Urea Fertilizer",
+    "price": 215,
+    "unit": "bag",
+    "discount": "12% Off",
+    "description": "Urea-based fertilizer."
+  },
+  {
+    "id": 16,
+    "category": "seeds",
+    "image": "/assets/images/inputs/seeds.png",
+    "title": "Hybrid Seeds",
+    "price": 130,
+    "unit": "kg",
+    "discount": "13% Off",
+    "description": "High-yield hybrid seeds."
+  },
+  {
+    "id": 17,
+    "category": "seeds",
+    "image": "/assets/images/inputs/seeds.png",
+    "title": "Maize Seeds",
+    "price": 110,
+    "unit": "kg",
+    "discount": "8% Off",
+    "description": "High-germination maize seeds."
+  },
+  {
+    "id": 18,
+    "category": "seeds",
+    "image": "/assets/images/inputs/seeds.png",
+    "title": "Wheat Seeds",
+    "price": 140,
+    "unit": "kg",
+    "discount": "6% Off",
+    "description": "Quality wheat seeds."
+  },
+  {
+    "id": 19,
+    "category": "seeds",
+    "image": "/assets/images/inputs/seeds.png",
+    "title": "Barley Seeds",
+    "price": 125,
+    "unit": "kg",
+    "discount": "9% Off",
+    "description": "Premium barley seeds."
+  },
+  {
+    "id": 20,
+    "category": "seeds",
+    "image": "/assets/images/inputs/seeds.png",
+    "title": "Sorghum Seeds",
+    "price": 115,
+    "unit": "kg",
+    "discount": "9% Off",
+    "description": "Top-quality sorghum seeds."
+  }
+]
