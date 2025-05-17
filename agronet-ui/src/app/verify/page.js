@@ -25,7 +25,10 @@ function OTPInput({ value, onChange }) {
           inputRef={inputs[i]}
           value={value[i] || ''}
           onChange={(e) => handleChange(i, e)}
-          inputProps={{ maxLength: 1, style: { textAlign: 'center', fontSize: 24, width: 40 } }}
+          inputProps={{
+            maxLength: 1,
+            style: { textAlign: 'center', fontSize: 24, width: 40 },
+          }}
           variant="outlined"
         />
       ))}
@@ -39,18 +42,31 @@ export default function VerifyPage() {
 
   const verifyOTP = async () => {
     if (otp.length === 4) {
-      // TODO: API call to verify OTP
-      router.push('/dashboard'); // Redirect after successful login
+      router.push('/dashboard');
     }
   };
 
   return (
-    <Box minHeight="100vh" display="flex" alignItems="center" justifyContent="center" className="bg-green-500">
-      <Paper elevation={3} sx={{ p: 4, borderRadius: 4, width: '100%', maxWidth: 400 }}>
+    <Box
+      minHeight="100vh"
+      display="flex"
+      alignItems="center"
+      justifyContent="center"
+      className="bg-green-500"
+    >
+      <Paper
+        elevation={3}
+        sx={{ p: 4, borderRadius: 4, width: '100%', maxWidth: 400 }}
+      >
         <Typography variant="h5" fontWeight="bold" mb={1} align="center">
           Verify
         </Typography>
-        <Typography variant="body1" color="text.secondary" mb={2} align="center">
+        <Typography
+          variant="body1"
+          color="text.secondary"
+          mb={2}
+          align="center"
+        >
           Please enter the code sent to your number.
         </Typography>
         <OTPInput value={otp} onChange={setOtp} />
@@ -60,15 +76,32 @@ export default function VerifyPage() {
           fullWidth
           variant="contained"
           color="primary"
-          sx={{ mt: 2, mb: 1, fontWeight: 'bold', bgcolor: '#1B3557', '&:hover': { bgcolor: '#16294a' } }}
+          sx={{
+            mt: 2,
+            mb: 1,
+            fontWeight: 'bold',
+            bgcolor: '#1B3557',
+            '&:hover': { bgcolor: '#16294a' },
+          }}
         >
           Verify
         </Button>
-        <Typography variant="body2" color="text.secondary" align="center" mt={2}>
-          Resend code <span style={{ color: '#1976d2', cursor: 'pointer' }}>00:30</span>
+        <Typography
+          variant="body2"
+          color="text.secondary"
+          align="center"
+          mt={2}
+        >
+          Resend code{' '}
+          <span style={{ color: '#1976d2', cursor: 'pointer' }}>00:30</span>
         </Typography>
         <Typography variant="body2" align="center" mt={1}>
-          <a href="/login" style={{ color: '#1976d2', textDecoration: 'underline' }}>Change number</a>
+          <a
+            href="/login"
+            style={{ color: '#1976d2', textDecoration: 'underline' }}
+          >
+            Change number
+          </a>
         </Typography>
       </Paper>
     </Box>

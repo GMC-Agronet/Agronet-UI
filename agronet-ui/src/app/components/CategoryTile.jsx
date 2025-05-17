@@ -4,11 +4,12 @@ import Link from 'next/link';
 
 export default function CategoryTile({ name, image, action }) {
   return (
-    <Link href={action} passHref>
+    <Link href={`/category-items/${name.toLowerCase()}`} passHref>
       <Box
         sx={{
-          width: '80%',
-          height: '180px',
+          width: '80%', // Make the width responsive to fit the grid
+          maxWidth: '180px', // Set a maximum width for consistency
+          height: '150px',
           bgcolor: 'gray.200',
           borderRadius: 2,
           overflow: 'hidden',
@@ -16,18 +17,16 @@ export default function CategoryTile({ name, image, action }) {
           flexDirection: 'column',
           alignItems: 'center',
           cursor: 'pointer',
-          justifyContent: 'center', 
-          borderColor: '#3CB371',
-          borderWidth: "2px",
-          marginBottom: "10px",
-
-          borderRadius: '10%',
-          background:"#e7f3eb",
-          padding: '10px',
+          justifyContent: 'center',
+          borderColor: '#ffffff',
+          borderWidth: '2px',
+          margin: 'auto', // Center the tile within the grid
+          background: '#e8f5ed',
+          padding: '15%',
         }}
       >
-        <Image src={image} alt={name} width={180} height={140} style={{ borderRadius: 8 }} />
-        <Typography variant="body2" mt={1}>
+        <Image src={image} alt={name} width={180} height={140} sx={{ borderRadius: 8 }} />
+        <Typography variant="body1" mt={1}>
           {name}
         </Typography>
       </Box>
