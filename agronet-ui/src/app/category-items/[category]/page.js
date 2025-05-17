@@ -2,7 +2,7 @@
 
 import { useParams } from 'next/navigation';
 import { Box, Grid, Typography } from '@mui/material';
-import ProductCard from '@/app/products/page';
+import ProductCard from '@/app/components/ProductCard';
 import CommonTopNav from '@/app/components/CommonTopNav';
 
 const mockCategoryItems = {
