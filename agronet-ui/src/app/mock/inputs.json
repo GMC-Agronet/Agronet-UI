@@ -1,0 +1,52 @@
+[
+  {
+    "id": 1,
+    "category": "fertilizer",
+    "image": "/assets/images/inputs/fertilizer.png",
+    "title": "Organic Fertilizer",
+    "price": 250,
+    "unit": "bag",
+    "discount": "12% Off",
+    "description": "Eco-friendly organic fertilizer."
+  },
+  {
+    "id": 2,
+    "category": "pesticide",
+    "image": "/assets/images/inputs/pesticide.png",
+    "title": "Pesticide",
+    "price": 180,
+    "unit": "bottle",
+    "discount": "7% Off",
+    "description": "Protect crops from pests."
+  },
+  {
+    "id": 3,
+    "category": "growth",
+    "image": "/assets/images/inputs/growth.png",
+    "title": "Growth Booster",
+    "price": 300,
+    "unit": "bottle",
+    "discount": "9% Off",
+    "description": "Boost plant growth effectively."
+  },
+  {
+    "id": 4,
+    "category": "organic",
+    "image": "/assets/images/inputs/organic.png",
+    "title": "Organic Seeds",
+    "price": 120,
+    "unit": "kg",
+    "discount": "11% Off",
+    "description": "Certified organic seeds."
+  },
+  {
+    "id": 5,
+    "category": "tractor",
+    "image": "/assets/images/inputs/tractor.png",
+    "title": "Mini Tractor",
+    "price": 5000,
+    "unit": "unit",
+    "discount": "5% Off",
+    "description": "Compact tractor for small farms."
+  }
+]
