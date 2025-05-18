@@ -69,7 +69,7 @@ export default function ProductCard({
                 color: 'white',
                 px: 1.5,
                 py: 0.5,
-                borderRadius: '12%',
+                borderRadius: '0%',
                 fontWeight: 700,
                 fontSize: 13,
                 zIndex: 2,

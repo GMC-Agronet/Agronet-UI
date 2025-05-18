@@ -11,11 +11,12 @@ import CategorySelection from '@/app/components/CategorySelection';
 import CropSelection from '@/app/components/CropSelection';
 import TopSellingProducts from '@/app/components/TopSellingProducts';
 import LandingPageSearchBar from '@/app/components/LandingPageSearchBar';
+import CommonTopNav from '../components/CommonTopNav';
 
 export default function Dashboard() {
   return (
     <Box sx={{ bgcolor: '#f5f5f5', minHeight: '100vh', pb: 8 }}>
-      <Box
+      {/* <Box
         sx={{
           bgcolor: 'primary.main',
           color: 'white',
@@ -43,9 +44,10 @@ export default function Dashboard() {
               <ShoppingCartIcon />
             </IconButton>
           </Box>
-        </Box>
+        </Box> 
         <LandingPageSearchBar />
-      </Box>
+      </Box> */}
+      <CommonTopNav />
 
       <CategorySelection />
       {/* <CropSelection /> */}

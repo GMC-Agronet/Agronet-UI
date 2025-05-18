@@ -9,23 +9,23 @@ const inputCategories = [
   { name: 'Offers', image: '/assets/images/seeds.png', action: '/offers' },
   {
     name: 'Herbicides',
-    image: '/assets/images/inputs/fertilize.png',
+    image: '/assets/images/inputs/herb.png',
     action: '/herbicides',
   },
   {
     name: 'Growth Promoters',
-    image: '/assets/images/inputs/growth.png',
+    image: '/assets/images/inputs/herb.png',
     action: '/growth-promoters',
   },
   {
     name: 'Fungicides',
-    image: '/assets/images/inputs/fertilize.png',
+    image: '/assets/images/inputs/fungicide.png',
     action: '/fungicides',
   },
   { name: 'Seeds', image: '/assets/images/inputs/seeds.png', action: '/seeds' },
   {
     name: 'Farm Machinery',
-    image: '/assets/images/inputs/tractor.png',
+    image: '/assets/images/inputs/machine.png',
     action: '/farm-machinery',
   },
   {
@@ -35,12 +35,12 @@ const inputCategories = [
   },
   {
     name: 'Poultry Feed',
-    image: '/assets/images/seeds.png',
+    image: '/assets/images/inputs/poultry.png',
     action: '/poultry-feed',
   },
   {
     name: 'Cattle Feed',
-    image: '/assets/images/seeds.png',
+    image: '/assets/images/inputs/cattle.png',
     action: '/cattle-feed',
   },
   {
@@ -50,7 +50,7 @@ const inputCategories = [
   },
   {
     name: 'Organic Farming',
-    image: '/assets/images/seeds.png',
+    image: '/assets/images/inputs/organic.png',
     action: '/organic-farming',
   },
 ];
@@ -65,13 +65,13 @@ export default function InputsPage() {
       </Typography>
       <Grid
         container
-        spacing={1} // Increased spacing for better alignment
+        spacing={1}
         sx={{
           justifyContent: 'center',
           marginBottom: '10vh',
           display: 'flex',
           flexWrap: 'wrap',
-          gap: 1, // Added gap for consistent spacing
+          gap: 1,
         }}
       >
         {inputCategories.map((tile, index) => (
@@ -84,7 +84,7 @@ export default function InputsPage() {
             key={index}
             sx={{ display: 'flex', justifyContent: 'center' }}
           >
-            <CategoryTile {...tile} />
+            <CategoryTile {...tile} titleAlign="center" />
           </Grid>
         ))}
       </Grid>
