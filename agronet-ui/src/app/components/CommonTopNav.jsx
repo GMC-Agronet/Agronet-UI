@@ -7,6 +7,7 @@ import LandingPageSearchBar from '@/app/components/LandingPageSearchBar';
 import SideNav from '@/app/components/SideNav';
 import MenuRoundedIcon from '@mui/icons-material/MenuRounded';
 import { useRouter } from 'next/navigation'; 
+import CartIcon from '@/app/components/CartIcon';
 
 
 const CommonTopNav = () => {
@@ -39,12 +40,13 @@ const CommonTopNav = () => {
             <IconButton color="inherit">
               <NotificationsIcon />
             </IconButton>
-            <IconButton color="inherit">
+            {/* <IconButton color="inherit">
               <ShoppingCartIcon />
-            </IconButton>
+            </IconButton> */}
             <IconButton color="inherit" onClick={() => setSidebarOpen(true)} >
               <MenuRoundedIcon />
             </IconButton>
+            <CartIcon />
           </Box>
         </Box>
         <LandingPageSearchBar />
