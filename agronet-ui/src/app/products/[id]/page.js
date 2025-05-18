@@ -93,14 +93,16 @@ export default function ProductDetailsPage() {
                 <Button
                   variant="contained"
                   color="primary"
-                  size="small"
+                  size="large"
                   sx={{
-                    flex: 1.6,
+                    flex: 1,
                     py: 1.2,
                     fontWeight: 600,
                     fontSize: '0.8rem',
                     borderRadius: 1,
                     minWidth: 0,
+                    bgcolor: '#357a38',
+                    '&:hover': { bgcolor: '#27632a' },
                   }}
                   onClick={() => dispatch(addToCart(product))}
                   disabled={isInCart}
@@ -109,16 +111,18 @@ export default function ProductDetailsPage() {
                 </Button>
                 <Button
                   variant="contained"
-                  color="secondary"
-                  size="small"
+                  color="warning"
+                  size="large"
                   sx={{
-                    flex: 0.8,
+                    flex: 1,
                     py: 1.2,
                     fontWeight: 600,
                     fontSize: '0.8rem',
                     borderRadius: 1,
                     minWidth: 0,
                     color: 'white',
+                    bgcolor: '#e3912c',
+                    '&:hover': { bgcolor: '#b86b13' },
                   }}
                   onClick={() => alert(`Buying ${product.title}...`)}
                 >

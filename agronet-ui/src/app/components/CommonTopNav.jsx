@@ -43,10 +43,11 @@ const CommonTopNav = () => {
             {/* <IconButton color="inherit">
               <ShoppingCartIcon />
             </IconButton> */}
+            <CartIcon />
+
             <IconButton color="inherit" onClick={() => setSidebarOpen(true)} >
               <MenuRoundedIcon />
             </IconButton>
-            <CartIcon />
           </Box>
         </Box>
         <LandingPageSearchBar />
