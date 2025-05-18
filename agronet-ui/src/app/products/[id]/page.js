@@ -7,14 +7,18 @@ import CommonTopNav from '@/app/components/CommonTopNav';
 import ProductCard from '@/app/components/ProductCard';
 import ProductBreadcrumbs from '@/app/components/ProductBreadcrumbs';
 import productsData from '@/app/mock/products.json';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addToCart } from '@/app/redux/slices/cartSlice';
 
 export default function ProductDetailsPage() {
   const { id } = useParams();
   const dispatch = useDispatch();
+  const cartItems = useSelector((state) => state.cart.items);
   // Find product by id in flat array
   const product = productsData.find((item) => String(item.id) === String(id));
+  const isInCart = cartItems.some(
+    (item) => String(item.id) === String(product.id),
+  );
   if (!product) {
     return <Typography variant="h5">Product not found</Typography>;
   }
@@ -30,14 +34,14 @@ export default function ProductDetailsPage() {
   return (
     <Box minHeight="100vh" bgcolor="background.default">
       <CommonTopNav />
-      <Grid container spacing={6} p={4}>
+      <Grid container spacing={2} pl={1} pr={1}>
         <Grid item xs={12} sm={12} md={12}>
           <Box
             sx={{
               // border: '1.5px solid #e0e0e0',
               borderRadius: 2,
               p: 1,
-              boxShadow: 1,
+              // boxShadow: 1,
               display: 'flex',
               flexDirection: { xs: 'column', sm: 'row' },
               alignItems: { sm: 'flex-start' },
@@ -99,8 +103,9 @@ export default function ProductDetailsPage() {
                     minWidth: 0,
                   }}
                   onClick={() => dispatch(addToCart(product))}
+                  disabled={isInCart}
                 >
-                  Add to Cart
+                  {isInCart ? 'Added to Cart' : 'Add to Cart'}
                 </Button>
                 <Button
                   variant="contained"

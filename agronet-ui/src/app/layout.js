@@ -13,6 +13,8 @@ import Container from './container';
 import { useParams } from 'next/navigation';
 import theme from '../theme';
 import { ThemeProvider } from '@mui/material/styles';
+import BottomNavBar from './components/BottomNavBar';
+import { Box } from '@mui/material';
 
 const queryClient = new QueryClient();
 
@@ -39,7 +41,10 @@ export default function RootLayout({ children }) {
         <ReduxProvider store={store}>
           <QueryClientProvider client={queryClient}>
             <ThemeProvider theme={theme}>
-              <Container componentKey={componentKey}>{children}</Container>
+              <Box sx={{ pb: 8 }}>
+                <Container componentKey={componentKey}>{children}</Container>
+              </Box>
+              <BottomNavBar />
             </ThemeProvider>
             <ReactQueryDevtools initialIsOpen={false} />
           </QueryClientProvider>
