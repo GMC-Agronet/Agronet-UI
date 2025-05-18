@@ -1,3 +1,5 @@
+'use client';
+
 import { Box, Typography, Button, Paper } from '@mui/material';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import Link from 'next/link';

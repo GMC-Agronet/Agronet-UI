@@ -1,7 +1,12 @@
+'use client';
+
 import ProductCard from '@/app/components/ProductCard';
 import productsData from '@/app/mock/products.json';
+import { useDispatch } from 'react-redux';
+import { addToCart } from '@/app/redux/slices/cartSlice';
 
 export default function Page() {
+  const dispatch = useDispatch();
   return (
     <div>
       {/* List all products as a grid */}
@@ -15,7 +20,7 @@ export default function Page() {
               price={item.price}
               unit={item.unit}
               discount={item.discount}
-              onAddToCart={() => alert(`${item.title} added to cart!`)}
+              onAddToCart={() => dispatch(addToCart(item))}
             />
           </div>
         ))}
