@@ -21,7 +21,7 @@ export default function ProductCard({
           overflow: 'hidden',
           boxShadow: 2,
           width: 180,
-          height: 300,
+          height: 260,
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'space-between',
@@ -53,7 +53,7 @@ export default function ProductCard({
         <Box
           sx={{
             width: '100%',
-            height: 148,
+            height: 120,
             bgcolor: '#ededed',
             display: 'flex',
             alignItems: 'center',
@@ -85,8 +85,8 @@ export default function ProductCard({
             </Box>
           )}
         </Box>
-        <Box sx={{ p: 2, flexGrow: 0.5 }}>
-          <Typography variant="subtitle1" fontWeight="bold" gutterBottom>
+        <Box sx={{ pt: 0, pl:2, flexGrow: 0.5 }}>
+          <Typography variant="subtitle1" fontWeight="normal" gutterBottom>
             {title}
           </Typography>
           <Typography variant="h6" component="span" fontWeight="bold">

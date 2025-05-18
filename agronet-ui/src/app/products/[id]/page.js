@@ -30,14 +30,14 @@ export default function ProductDetailsPage() {
   return (
     <Box minHeight="100vh" bgcolor="background.default">
       <CommonTopNav />
-      <Grid container spacing={6} p={4}>
+      <Grid container spacing={2} pl={1} pr={1}>
         <Grid item xs={12} sm={12} md={12}>
           <Box
             sx={{
               // border: '1.5px solid #e0e0e0',
               borderRadius: 2,
               p: 1,
-              boxShadow: 1,
+              // boxShadow: 1,
               display: 'flex',
               flexDirection: { xs: 'column', sm: 'row' },
               alignItems: { sm: 'flex-start' },
