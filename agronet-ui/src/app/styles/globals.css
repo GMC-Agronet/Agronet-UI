@@ -27,3 +27,15 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/*
+  Agronet App Gradient Background
+  Soft peach/cream diagonal gradient inspired by mobile app screenshot
+*/
+.agronet-gradient-bg {
+  min-height: 100vh;
+  min-width: 100vw;
+  background: linear-gradient(135deg, #fdf6ee 0%, #e6f7e0 40%, #b6e2b1 100%);
+  /* fallback for old browsers */
+  background-color: #e6f7e0;
+}

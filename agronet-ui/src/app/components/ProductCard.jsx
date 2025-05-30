@@ -5,7 +5,8 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import Link from 'next/link';
 import { useSelector } from 'react-redux';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import Shimmer from './Shimmer';
 
 export default function ProductCard({
   id,
@@ -22,6 +23,13 @@ export default function ProductCard({
   const cartItems = useSelector((state) => state.cart.items);
   const isInCart = cartItems.some((item) => item.id == id);
   const [selectedSize, setSelectedSize] = useState(sizes[0] || unit);
+  const [loading, setLoading] = useState(true);
+
+  // Simulate loading delay
+  useEffect(() => {
+    const timer = setTimeout(() => setLoading(false), 900);
+    return () => clearTimeout(timer);
+  }, []);
 
   // Calculate savings and percent discount if originalPrice is provided
   // For demo: force a discount to always show
@@ -37,96 +45,48 @@ export default function ProductCard({
     }
   };
 
+  if (loading) {
+    return <Shimmer type="card" />;
+  }
+
   return (
     <>
       <Link href={`/products/${id}`} passHref>
         <Paper
+          elevation={1}
           sx={{
+            bgcolor: 'white',
+            border: '1.5px solid #eee',
+            boxShadow: 2,
             borderRadius: 3,
-            overflow: 'hidden',
-            boxShadow: 0.5,
-            width: 180,
-            minHeight: 290,
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'space-between',
+            transition: 'box-shadow 0.2s, transform 0.15s',
+            '&:hover': {
+              boxShadow: 4,
+              transform: 'scale(1.02)',
+            },
             position: 'relative',
-            m: 'auto',
-            cursor: 'pointer',
-            textDecoration: 'none',
+            overflow: 'hidden',
             p: 0.5,
             mb: 7, // Add margin bottom to avoid overlap with BottomNavBar
+            width: 120,
+            minWidth: 180,
+            maxWidth: 260,
+            mx: 'auto',
+            display: 'flex',
+            flexDirection: 'column',
           }}
         >
-          {/* % OFF badge top-left */}
-          {percentOff && (
-            <Box
-              sx={{
-                position: 'absolute',
-                top: 0,
-                left: 0,
-                bgcolor: '#e3912c',
-                color: 'white',
-                px: 1.5,
-                py: 0.5,
-                borderRadius: '0%',
-                fontWeight: 700,
-                fontSize: 13,
-                zIndex: 2,
-              }}
-            >
-              {percentOff}% OFF
-            </Box>
-          )}
-          {/* Discount label top-right (if discount string provided) */}
-          {/* {discount && (
-            <Box
-              sx={{
-                position: 'absolute',
-                top: 0,
-                left: 0,
-                bgcolor: 'white',
-                borderRadius: '12%',
-                p: 0.5,
-                boxShadow: 1,
-                zIndex: 2,
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                minWidth: 28,
-                minHeight: 28,
-              }}
-            >
-              <Typography sx={{ color: '#e3912c', fontWeight: 700, fontSize: 13 }}>
-                {discount}
-              </Typography>
-            </Box>
-          )} */}
-          {/* Wishlist icon top-right, offset if discount label present */}
-          <Box
-            sx={{
-              position: 'absolute',
-              top: 2,
-              right: discount ? 4 : 8,
-              zIndex: 2,
-              bgcolor: 'white',
-              borderRadius: '50%',
-              p: 0.5,
-              boxShadow: 1,
-            }}
-          >
-            <FavoriteBorderIcon sx={{ color: '#bbb', fontSize: 22 }} />
-          </Box>
-          {/* Product image */}
+          {/* Product image area */}
           <Box
             sx={{
               width: '100%',
               height: 120,
-              bgcolor: '#ededed',
+              // bgcolor: '#ededed',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               mt: 3,
+              borderBottom: '1px solid #ddd',
             }}
           >
             {image ? (

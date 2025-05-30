@@ -1,6 +1,7 @@
 import React from 'react';
 import { Box, Typography, Button, Grid } from '@mui/material';
 import ProductCard from './ProductCard';
+import Shimmer from './Shimmer';
 
 const topSellingProducts = [
 	{
@@ -29,7 +30,7 @@ const topSellingProducts = [
 	},
 ];
 
-const TopSellingProducts = () => {
+const TopSellingProducts = ({ loading }) => {
 	return (
 		<Box p={2}>
 			<Box
@@ -44,24 +45,28 @@ const TopSellingProducts = () => {
 				<Button size="small">View All</Button>
 			</Box>
 			<Grid container spacing={2}>
-				{topSellingProducts.map((product, idx) => (
-					<Grid
-						item
-						xs={12}
-						sm={6}
-						md={4}
-						key={idx}
-						display="flex"
-						justifyContent="center"
-					>
-						<ProductCard
-							{...product}
-							onAddToCart={() =>
-								alert(`Added ${product.title} to cart!`)
-							}
-						/>
-					</Grid>
-				))}
+				{loading ? (
+					<Shimmer type="card" count={4} />
+				) : (
+					topSellingProducts.map((product, idx) => (
+						<Grid
+							item
+							xs={12}
+							sm={6}
+							md={4}
+							key={idx}
+							display="flex"
+							justifyContent="center"
+						>
+							<ProductCard
+								{...product}
+								onAddToCart={() =>
+									alert(`Added ${product.title} to cart!`)
+								}
+							/>
+						</Grid>
+					))
+				)}
 			</Grid>
 		</Box>
 	);

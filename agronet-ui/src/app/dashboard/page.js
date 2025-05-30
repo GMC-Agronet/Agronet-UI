@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { Box, IconButton } from '@mui/material';
+import { Box, IconButton, Typography } from '@mui/material';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import Image from 'next/image';
@@ -15,7 +15,7 @@ import CommonTopNav from '../components/CommonTopNav';
 
 export default function Dashboard() {
   return (
-    <Box sx={{ bgcolor: '#f5f5f5', minHeight: '100vh', pb: 8 }}>
+    <Box sx={{ minHeight: '100vh', pb: 8 }}>
       {/* <Box
         sx={{
           bgcolor: 'primary.main',
@@ -48,6 +48,17 @@ export default function Dashboard() {
         <LandingPageSearchBar />
       </Box> */}
       <CommonTopNav />
+
+      {/* Dashboard Welcome Section */}
+      <Box sx={{ px: { xs: 2, sm: 4 }, mt: 2, mb: 3 }}>
+        <Typography variant="h6" fontWeight={700} mb={1} color="primary.main">
+          GMC AgroNet - for the Future Farmers
+        </Typography>
+        <Typography variant="body1" color="text.secondary" mb={2}>
+          Discover quality agri-inputs, fresh produce, and the best prices.
+          Empowering farmers with digital tools for a sustainable future.
+        </Typography>
+      </Box>
 
       <CategorySelection />
       {/* <CropSelection /> */}
