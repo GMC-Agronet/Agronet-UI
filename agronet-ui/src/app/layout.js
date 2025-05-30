@@ -38,17 +38,19 @@ export default function RootLayout({ children }) {
         `}</style>
       </head>
       <body>
-        <ReduxProvider store={store}>
-          <QueryClientProvider client={queryClient}>
-            <ThemeProvider theme={theme}>
-              <Box sx={{ pb: 8 }}>
-                <Container componentKey={componentKey}>{children}</Container>
-              </Box>
-              <BottomNavBar />
-            </ThemeProvider>
-            <ReactQueryDevtools initialIsOpen={false} />
-          </QueryClientProvider>
-        </ReduxProvider>
+        <div className="agronet-gradient-bg">
+          <ReduxProvider store={store}>
+            <QueryClientProvider client={queryClient}>
+              <ThemeProvider theme={theme}>
+                <Box sx={{ pb: 8 }}>
+                  <Container componentKey={componentKey}>{children}</Container>
+                </Box>
+                <BottomNavBar />
+              </ThemeProvider>
+              <ReactQueryDevtools initialIsOpen={false} />
+            </QueryClientProvider>
+          </ReduxProvider>
+        </div>
       </body>
     </html>
   );

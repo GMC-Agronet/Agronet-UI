@@ -4,6 +4,8 @@ import { Box, Typography, Grid } from '@mui/material';
 import Slider from '@/app/components/Slider';
 import CategoryTile from '@/app/components/CategoryTile';
 import CommonTopNav from '@/app/components/CommonTopNav';
+import Shimmer from '../components/Shimmer';
+import { useState, useEffect } from 'react';
 
 const inputCategories = [
   { name: 'Offers', image: '/assets/images/seeds.png', action: '/offers' },
@@ -56,8 +58,22 @@ const inputCategories = [
 ];
 
 export default function InputsPage() {
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    const timer = setTimeout(() => setLoading(false), 900);
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (loading) {
+    return (
+      <Box p={2}>
+        <Shimmer type="tile" count={6} />
+      </Box>
+    );
+  }
+
   return (
-    <Box p={0} minHeight="100vh" bgcolor="background.default">
+    <Box p={0}>
       <CommonTopNav />
 
       <Typography variant="h5" fontWeight="bold" mt={4} ml={2}>

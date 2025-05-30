@@ -28,13 +28,31 @@ const CommonTopNav = () => {
       >
         <Box display="flex" justifyContent="space-between" alignItems="center">
           <Box>
-            <Image
-              src="/assets/images/landingPage/logo.svg"
-              alt="GMC AgroNet Logo"
-              width={120}
-              height={40}
+            <Box
+              sx={{
+                display: 'inline-block',
+                borderRadius: 2,
+                transition: 'box-shadow 0.2s, transform 0.15s',
+                cursor: 'pointer',
+                '&:active': {
+                  boxShadow: 8,
+                  transform: 'scale(0.97) translateY(2px)',
+                },
+                '&:hover': {
+                  boxShadow: 4,
+                },
+              }}
+              data-interactive-card
               onClick={() => router.push('/dashboard')}
-            />
+            >
+              <Image
+                src="/assets/images/landingPage/logo.svg"
+                alt="GMC AgroNet Logo"
+                width={120}
+                height={40}
+                style={{ display: 'block' }}
+              />
+            </Box>
           </Box>
           <Box display="flex" alignItems="center" gap={2}>
             <IconButton color="inherit">
@@ -43,7 +61,22 @@ const CommonTopNav = () => {
             {/* <IconButton color="inherit">
               <ShoppingCartIcon />
             </IconButton> */}
-            <CartIcon />
+            <CartIcon
+              sx={{
+                display: 'inline-block',
+                borderRadius: 2,
+                transition: 'box-shadow 0.2s, transform 0.15s',
+                cursor: 'pointer',
+                '&:active': {
+                  boxShadow: 8,
+                  transform: 'scale(0.97) translateY(2px)',
+                },
+                '&:hover': {
+                  boxShadow: 4,
+                },
+              }}
+              data-interactive-card
+            />
 
             <IconButton color="inherit" onClick={() => setSidebarOpen(true)} >
               <MenuRoundedIcon />

@@ -6,22 +6,22 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 const slides = [
   {
     title: 'Summer Season Special',
-    description: 'Get 15% off on all seeds and fertilizers for summer crops. Limited time offer for registered farmers. Stock up now for the upcoming season and maximize your yield with our premium quality inputs.',
-    image: '',
+    description: '15% off on all seeds and fertilizers. Stock up now for the season!',
+    image: '/assets/images/inputs/seeds.png',
     button: 'Shop Now',
     bg: 'linear-gradient(135deg, #43cea2 0%, #185a9d 100%)', // blue-green
   },
   {
     title: 'Monsoon Bonanza',
-    description: 'Exclusive deals on crop protection products. Prepare your fields for the rains!',
-    image: '',
+    description: 'Exclusive deals on crop protection. Prepare for the rains!',
+    image: '/assets/images/tractor.png',
     button: 'Explore',
     bg: 'linear-gradient(135deg, #ff5858 0%, #f09819 100%)', // red-orange
   },
   {
     title: 'AgroNet Rewards',
-    description: 'Earn points on every purchase and redeem for exciting rewards.',
-    image: '',
+    description: 'Earn points on every purchase. Redeem for rewards.',
+    image: '/assets/images/inputs/growth.png',
     button: 'Learn More',
     bg: 'linear-gradient(135deg, #11998e 0%, #38ef7d 100%)', // green
   },
@@ -40,27 +40,27 @@ export default function PromoSlider() {
   const next = () => setIndex((i) => (i === slides.length - 1 ? 0 : i + 1));
 
   return (
-    <Box sx={{ position: 'relative', width: '100%', maxWidth: 600, mx: 'auto', mb: 3 }}>
+    <Box sx={{ position: 'relative', width: '100%', maxWidth: 600, mx: 'auto', mb: 3, mt: 2 }}>
       <Fade in>
         <Box
           sx={{
             background: slides[index].bg,
             color: 'white',
             borderRadius: 3,
-            p: 4,
-            minHeight: 300,
-            height: 300,
+            p: 0,
+            // minHeight: 320,
+            height: 270,
             width: '100%',
             maxWidth: 600,
             boxShadow: 2,
             display: 'flex',
             flexDirection: 'column',
-            justifyContent: 'center',
+            justifyContent: 'flex-end',
             position: 'relative',
             overflow: 'hidden',
           }}
         >
-          {/* Optional: background image */}
+          {/* Overlay image */}
           {slides[index].image && (
             <Box
               component="img"
@@ -68,32 +68,46 @@ export default function PromoSlider() {
               alt=""
               sx={{
                 position: 'absolute',
-                top: 0,
-                left: 0,
-                width: '100%',
-                height: '100%',
-                objectFit: 'cover',
-                opacity: 0.2,
-                zIndex: 0,
+                right: 0,
+                bottom: 0,
+                width: { xs: '50%', sm: '50%' },
+                height: 'auto',
+                maxHeight: 220,
+                objectFit: 'contain',
+                opacity: 0.85,
+                zIndex: 1,
+                filter: 'drop-shadow(0 8px 32px rgba(0,0,0,0.18))',
+                pointerEvents: 'none',
               }}
             />
           )}
+          {/* Dark gradient overlay for text readability */}
+          <Box
+            sx={{
+              position: 'absolute',
+              inset: 0,
+              zIndex: 2,
+              background: 'linear-gradient(120deg, rgba(0,0,0,0.38) 40%, rgba(0,0,0,0.08) 100%)',
+            }}
+          />
           {/* Content */}
-          <Typography variant="h4" fontWeight="bold" mb={2} mt={3} sx={{ zIndex: 1 }}>
-            {slides[index].title}
-          </Typography>
-          <Typography variant="body1" mb={3} sx={{ zIndex: 1 }}>
-            {slides[index].description}
-          </Typography>
-          <Button
-            variant="contained"
-            color="inherit"
-            sx={{ bgcolor: 'white', color: 'success.main', fontWeight: 600, width: 160, zIndex: 1 }}
-          >
-            {slides[index].button}
-          </Button>
+          <Box sx={{ position: 'relative', zIndex: 3, p: 4, maxWidth: 340 }}>
+            <Typography variant="h5" fontWeight="bold" mb={2} mt={1}>
+              {slides[index].title}
+            </Typography>
+            <Typography variant="body1" mb={3}>
+              {slides[index].description}
+            </Typography>
+            <Button
+              variant="contained"
+              color="inherit"
+              sx={{ bgcolor: 'white', color: 'success.main', fontWeight: 600, width: 160 }}
+            >
+              {slides[index].button}
+            </Button>
+          </Box>
           {/* Navigation Arrows */}
-          <IconButton
+          {/* <IconButton
             onClick={prev}
             sx={{
               position: 'absolute',
@@ -102,7 +116,7 @@ export default function PromoSlider() {
               transform: 'translateY(-50%)',
               bgcolor: 'rgba(255,255,255,0.3)',
               color: 'white',
-              zIndex: 2,
+              zIndex: 4,
             }}
           >
             <ArrowBackIosNewIcon />
@@ -116,13 +130,13 @@ export default function PromoSlider() {
               transform: 'translateY(-50%)',
               bgcolor: 'rgba(255,255,255,0.3)',
               color: 'white',
-              zIndex: 2,
+              zIndex: 4,
             }}
           >
             <ArrowForwardIosIcon />
-          </IconButton>
+          </IconButton> */}
           {/* Dots */}
-          <Box sx={{ display: 'flex', justifyContent: 'center', mt: 3, zIndex: 2 }}>
+          <Box sx={{ display: 'flex', justifyContent: 'center', mt: 3, zIndex: 4, position: 'relative' }}>
             {slides.map((_, i) => (
               <Box
                 key={i}
