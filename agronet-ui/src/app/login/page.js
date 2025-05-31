@@ -182,6 +182,11 @@ export default function LoginPage() {
             },
           }}
           disabled={otpSent}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter' && !otpSent && valid) {
+              handleSendOtp();
+            }
+          }}
         />
         {otpSent && (
           <TextField
@@ -193,6 +198,11 @@ export default function LoginPage() {
             sx={{ mb: 2 }}
             InputProps={{
               style: { background: 'rgba(255,255,255,0.95)', borderRadius: 8 },
+            }}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' && otp.length === 6) {
+                handleLogin();
+              }
             }}
           />
         )}
