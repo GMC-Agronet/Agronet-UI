@@ -116,16 +116,16 @@ export default function ProductCard({
           </Box>
           {/* Product info */}
           <Box sx={{ px: 2, pt: 1, flexGrow: 1 }}>
-            <Typography variant="subtitle1" fontWeight={400} gutterBottom noWrap>
+            <Typography variant="subtitle1" fontWeight={700} gutterBottom noWrap>
               {title}
             </Typography>
             {brand && (
-              <Typography variant="body2" color="text.secondary" sx={{ mb: 0.5 }}>
+              <Typography variant="body2" color="text.secondary" sx={{ mb: 0.5, fontWeight: 400 }}>
                 {brand}
               </Typography>
             )}
             <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 0.5 }}>
-              <Typography variant="body1" fontWeight={400} color="text.primary">
+              <Typography variant="body1" fontWeight={700} color="text.primary">
                 ₹{price}
               </Typography>
               {hasDiscount && (
@@ -150,18 +150,18 @@ export default function ProductCard({
                     display: 'flex',
                     alignItems: 'center',
                     fontSize: 15,
-                    fontWeight: 400,
+                    fontWeight: 700,
                     gap: 0.5,
                   }}
                 >
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" style={{ marginRight: 2, display: 'inline' }}><circle cx="12" cy="12" r="12" fill="#fff"/><text x="7" y="17" fontSize="12" fill="#4caf50" fontWeight="bold">%</text></svg>
-                  <span style={{ fontWeight: 600, fontSize: 15, color: 'white' }}>Save ₹{savings}</span>
+                  <span style={{ fontWeight: 700, fontSize: 15, color: 'white' }}>Save ₹{savings}</span>
                 </Box>
               </Box>
             )}
             {/* Size dropdown */}
             <Box sx={{ display: 'flex', alignItems: 'center', mt: 1 }}>
-              <Typography variant="body2" sx={{ fontWeight: 500, mr: 1 }}>
+              <Typography variant="body2" sx={{ fontWeight: 700, mr: 1 }}>
                 Size
               </Typography>
               <select
@@ -175,10 +175,12 @@ export default function ProductCard({
                   minWidth: 70,
                   background: '#fff',
                   color: '#333',
+                  textTransform: 'capitalize',
+                  fontWeight: 600,
                 }}
               >
                 {(sizes.length ? sizes : [unit]).map((sz) => (
-                  <option key={sz} value={sz}>
+                  <option key={sz} value={sz} style={{ textTransform: 'capitalize', fontWeight: 600 }}>
                     {sz}
                   </option>
                 ))}
