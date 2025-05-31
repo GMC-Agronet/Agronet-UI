@@ -26,7 +26,7 @@ const BottomNavBar = () => {
         }}
       >
         <BottomNavigation showLabels>
-          <BottomNavigationAction label="Home" icon={<HomeIcon />} sx={{
+          <BottomNavigationAction label="Home" icon={<HomeIcon />} onClick={() => router.push('/dashboard')} sx={{
             borderRadius: 2,
             transition: 'box-shadow 0.2s, transform 0.15s',
             '&:active': {
