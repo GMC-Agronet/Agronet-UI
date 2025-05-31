@@ -155,6 +155,7 @@ export default function LoginPage() {
           Login to join the harvest.
         </Typography>
         <TextField
+          type="tel"
           variant="outlined"
           fullWidth
           value={phone}
@@ -184,6 +185,7 @@ export default function LoginPage() {
         />
         {otpSent && (
           <TextField
+            type="tel"
             label="OTP"
             value={otp}
             onChange={(e) => setOtp(e.target.value)}
