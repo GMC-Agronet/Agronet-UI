@@ -8,12 +8,14 @@ import SupportAgentIcon from '@mui/icons-material/SupportAgent';
 import LogoutIcon from '@mui/icons-material/Logout';
 import FlagIcon from '@mui/icons-material/Flag';
 import ListAltIcon from '@mui/icons-material/ListAlt';
+import AgricultureIcon from '@mui/icons-material/Agriculture';
 import { useSelector, useDispatch } from 'react-redux';
 import { logout } from '../redux/slices/authSlice';
 import { useRouter } from 'next/navigation';
 
 const menuItems = [
   { label: 'Profile', icon: <PersonIcon /> },
+  { label: 'My Crop', icon: <AgricultureIcon /> },
   { label: 'Settings', icon: <SettingsIcon /> },
   { label: 'Saved items', icon: <FavoriteBorderIcon /> },
   { label: 'Purchases', icon: <ShoppingBagIcon /> },
@@ -69,7 +71,7 @@ export default function SideNav({ isOpen, onClose }) {
                 <ListItem
                   button
                   key={item.label}
-                  onClick={item.label === 'Logout' ? handleLogout : item.label === 'Profile' ? () => { onClose(); router.push('/profile'); } : undefined}
+                  onClick={item.label === 'Logout' ? handleLogout : item.label === 'Profile' ? () => { onClose(); router.push('/profile'); } : item.label === 'My Crop' ? () => { onClose(); router.push('/mycrop'); } : undefined}
                   sx={{
                     py: 2.1,
                     px: 4,

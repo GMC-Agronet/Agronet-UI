@@ -6,6 +6,7 @@ import HomeIcon from '@mui/icons-material/Home';
 import SupportAgentIcon from '@mui/icons-material/SupportAgent';
 import ListAltIcon from '@mui/icons-material/ListAlt';
 import PersonIcon from '@mui/icons-material/Person';
+import AgricultureIcon from '@mui/icons-material/Agriculture';
 import { useRouter } from 'next/navigation';
 import { useSelector } from 'react-redux';
 
@@ -38,6 +39,19 @@ const BottomNavBar = () => {
           }} />
           {isLoggedIn && (
             <BottomNavigationAction label="My Orders" icon={<ListAltIcon />} onClick={() => router.push('/orders')} sx={{
+              borderRadius: 2,
+              transition: 'box-shadow 0.2s, transform 0.15s',
+              '&:active': {
+                boxShadow: 8,
+                transform: 'scale(0.97) translateY(2px)',
+              },
+              '&:hover': {
+                boxShadow: 4,
+              },
+            }} />
+          )}
+          {isLoggedIn && (
+            <BottomNavigationAction label="My Crop" icon={<AgricultureIcon />} onClick={() => router.push('/mycrop')} sx={{
               borderRadius: 2,
               transition: 'box-shadow 0.2s, transform 0.15s',
               '&:active': {
