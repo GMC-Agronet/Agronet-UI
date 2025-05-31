@@ -15,13 +15,14 @@ import theme from '../theme';
 import { ThemeProvider } from '@mui/material/styles';
 import BottomNavBar from './components/BottomNavBar';
 import { Box } from '@mui/material';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useRouter } from 'next/navigation';
 import Dialog from '@mui/material/Dialog';
 import DialogTitle from '@mui/material/DialogTitle';
 import DialogContent from '@mui/material/DialogContent';
 import DialogActions from '@mui/material/DialogActions';
 import Button from '@mui/material/Button';
+import { logout } from './redux/slices/authSlice';
 
 const queryClient = new QueryClient();
 
@@ -59,6 +60,7 @@ function LayoutContent({ children }) {
   const [componentKey, setComponentKey] = React.useState('home');
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const router = useRouter();
+  const dispatch = useDispatch();
   const [showLoginDialog, setShowLoginDialog] = React.useState(false);
   const protectedRoutes = React.useMemo(
     () => ['/profile', '/settings', '/orders', '/my-orders'],
@@ -103,6 +105,25 @@ function LayoutContent({ children }) {
     }
   };
 
+  // Inactivity auto-logout (2 min)
+  React.useEffect(() => {
+    if (!isLoggedIn) return;
+    let timer;
+    const resetTimer = () => {
+      clearTimeout(timer);
+      timer = setTimeout(() => {
+        dispatch(logout());
+      }, 2 * 60 * 1000); // 2 minutes
+    };
+    const events = ['mousemove', 'keydown', 'mousedown', 'touchstart'];
+    events.forEach((event) => window.addEventListener(event, resetTimer));
+    resetTimer();
+    return () => {
+      clearTimeout(timer);
+      events.forEach((event) => window.removeEventListener(event, resetTimer));
+    };
+  }, [isLoggedIn, dispatch]);
+
   return (
     <>
       <Box sx={{ pb: 8 }}>
@@ -126,7 +147,9 @@ function LayoutContent({ children }) {
           <Button
             onClick={() => {
               setShowLoginDialog(false);
-              router.push('/login');
+              setTimeout(() => {
+                window.location.replace('/login');
+              }, 150);
             }}
             color="primary"
             variant="contained"

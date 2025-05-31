@@ -34,8 +34,15 @@ export default function ProductDetailsPage() {
   return (
     <Box minHeight="100vh" bgcolor="background.default">
       <CommonTopNav />
-      <Grid container spacing={2} pl={1} pr={1}>
-        <Grid item xs={12} sm={12} md={12}>
+      <Grid container spacing={2} pl={4} pr={4}>
+        {/* <Grid container spacing={2} pl={1}> */}
+        <Grid
+          item
+          xs={12}
+          sm={12}
+          md={12}
+          sx={{ width: '-webkit-fill-available' }}
+        >
           <Box
             sx={{
               // border: '1.5px solid #e0e0e0',
@@ -63,6 +70,8 @@ export default function ProductDetailsPage() {
                   width: '100%',
                   maxWidth: 400,
                   height: 'auto',
+                  borderBottom: '2px solid #e0e0e0',
+                  marginBottom: 16,
                 }}
               />
             </Box>

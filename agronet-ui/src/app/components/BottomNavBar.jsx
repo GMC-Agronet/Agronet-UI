@@ -49,17 +49,26 @@ const BottomNavBar = () => {
               },
             }} />
           )}
-          <BottomNavigationAction label="Profile" icon={<PersonIcon />} sx={{
-            borderRadius: 2,
-            transition: 'box-shadow 0.2s, transform 0.15s',
-            '&:active': {
-              boxShadow: 8,
-              transform: 'scale(0.97) translateY(2px)',
-            },
-            '&:hover': {
-              boxShadow: 4,
-            },
-          }} />
+          <BottomNavigationAction label="Profile" icon={<PersonIcon />} onClick={() => {
+  if (isLoggedIn) {
+    router.push('/profile');
+  } else {
+    // Optionally, trigger login dialog if available
+    if (typeof window !== 'undefined') {
+      window.dispatchEvent(new CustomEvent('show-login-dialog'));
+    }
+  }
+}} sx={{
+  borderRadius: 2,
+  transition: 'box-shadow 0.2s, transform 0.15s',
+  '&:active': {
+    boxShadow: 8,
+    transform: 'scale(0.97) translateY(2px)',
+  },
+  '&:hover': {
+    boxShadow: 4,
+  },
+}} />
           <BottomNavigationAction label="Support" icon={<SupportAgentIcon />} sx={{
             borderRadius: 2,
             transition: 'box-shadow 0.2s, transform 0.15s',

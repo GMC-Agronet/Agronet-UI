@@ -10,6 +10,7 @@ import FlagIcon from '@mui/icons-material/Flag';
 import ListAltIcon from '@mui/icons-material/ListAlt';
 import { useSelector, useDispatch } from 'react-redux';
 import { logout } from '../redux/slices/authSlice';
+import { useRouter } from 'next/navigation';
 
 const menuItems = [
   { label: 'Profile', icon: <PersonIcon /> },
@@ -24,6 +25,7 @@ export default function SideNav({ isOpen, onClose }) {
   const user = useSelector(state => state.auth.user);
   const isLoggedIn = useSelector(state => state.auth.isLoggedIn);
   const dispatch = useDispatch();
+  const router = useRouter();
 
   const handleLogout = () => {
     dispatch(logout());
@@ -67,7 +69,7 @@ export default function SideNav({ isOpen, onClose }) {
                 <ListItem
                   button
                   key={item.label}
-                  onClick={item.label === 'Logout' ? handleLogout : undefined}
+                  onClick={item.label === 'Logout' ? handleLogout : item.label === 'Profile' ? () => { onClose(); router.push('/profile'); } : undefined}
                   sx={{
                     py: 2.1,
                     px: 4,
