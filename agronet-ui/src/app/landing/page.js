@@ -2,15 +2,26 @@
 
 import { Box, Typography, Button } from '@mui/material';
 import { useRouter } from 'next/navigation';
-import { use } from 'react';
 import Image from 'next/image';
+import { useEffect } from 'react';
 
 export default function LandingPage() {
   const router = useRouter();
+  useEffect(() => {
+    // Prevent scroll on landing page
+    const originalHtmlOverflow = document.documentElement.style.overflow;
+    const originalBodyOverflow = document.body.style.overflow;
+    document.documentElement.style.overflow = 'hidden';
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.documentElement.style.overflow = originalHtmlOverflow;
+      document.body.style.overflow = originalBodyOverflow;
+    };
+  }, []);
   return (
     <Box
       sx={{
-        minHeight: '94vh',
+        minHeight: '100vh',
         width: '100vw',
         position: 'relative',
         display: 'flex',
@@ -20,7 +31,7 @@ export default function LandingPage() {
         background: 'url(/assets/images/farm.jpg) center/cover no-repeat',
         borderRadius: { xs: 0, sm: 6 },
         overflow: 'hidden',
-        pb: { xs: 6, sm: 10 },
+        pb: 0, // Remove bottom padding to eliminate space for BottomNavBar
         pl: { xs: 2, sm: 8 },
       }}
     >
@@ -91,3 +102,5 @@ export default function LandingPage() {
     </Box>
   );
 }
+
+// Prevent BottomNavBar from rendering on the landing page by checking the current route in layout.js and conditionally rendering BottomNavBar only if the route is not '/landing'.
