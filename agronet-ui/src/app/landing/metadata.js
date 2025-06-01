@@ -10,7 +10,7 @@ export const metadata = {
   openGraph: {
     title: 'GMC AgroNet',
     description: 'Building the Digital Future for Sustainable Agriculture',
-    url: 'https://yourdomain.com',
+    url: 'https://gmcagronet.netlify.app',
     siteName: 'GMC AgroNet',
     images: [
       {
