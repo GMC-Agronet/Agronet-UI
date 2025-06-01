@@ -1,16 +1,18 @@
 import React from "react";
 import { Box, Grid, Paper, Typography } from "@mui/material";
 import { useRouter } from "next/navigation";
+import { useLanguage } from '../hooks/useLanguage.js';
 
 const categories = [
-  { img: '/assets/images/tractor.png', label: 'Inputs', action: '/inputs' },
-  { img: '/assets/images/produce2.png', label: 'Produce', action: '/produce' },
-  { img: '/assets/images/mandi2.png', label: 'Prices', action: '/prices' },
-  { img: '/assets/images/credit.png', label: 'Credit', action: '/credit' },
+  { img: '/assets/images/tractor.png', label: 'inputsPageInputs', action: '/inputs' },
+  { img: '/assets/images/produce2.png', label: 'inputsPageProduce', action: '/produce' },
+  { img: '/assets/images/mandi2.png', label: 'inputsPagePrices', action: '/prices' },
+  { img: '/assets/images/credit.png', label: 'inputsPageCredit', action: '/credit' },
 ];
 
 const CategorySelection = () => {
   const router = useRouter();
+  const { strings } = useLanguage();
 
   const handleCategoryClick = (action) => {
     router.push(action); 
@@ -42,7 +44,7 @@ const CategorySelection = () => {
             
           </Paper>
           <Typography variant="subtitle2" fontWeight="bold" color="primary" align="center" mt={1}>
-              {card.label}
+              {strings[card.label] || card.label}
             </Typography>
         </Grid>
       ))}
