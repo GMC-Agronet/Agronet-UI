@@ -10,10 +10,21 @@ export const metadata = {
   openGraph: {
     title: 'GMC AgroNet',
     description: 'Building the Digital Future for Sustainable Agriculture',
-    images: ['/assets/images/gmclogo.svg'],
+    url: 'https://yourdomain.com',
+    siteName: 'GMC AgroNet',
+    images: [
+      {
+        url: '/assets/images/gmclogo.svg',
+        width: 400,
+        height: 120,
+        alt: 'GMC AgroNet Logo',
+      },
+    ],
+    locale: 'en_US',
+    type: 'website',
   },
   twitter: {
-    card: 'summary',
+    card: 'summary_large_image',
     title: 'GMC AgroNet',
     description: 'Building the Digital Future for Sustainable Agriculture',
     images: ['/assets/images/gmclogo.svg'],

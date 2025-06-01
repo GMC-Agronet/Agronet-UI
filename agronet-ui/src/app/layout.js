@@ -32,6 +32,11 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
+        <link
+          rel="icon"
+          href="/assets/images/gmclogo.svg"
+          type="image/svg+xml"
+        />
         <style>{`
           html, body, * {
             font-family: var(--agronet-font, 'Mulish', sans-serif) !important;
