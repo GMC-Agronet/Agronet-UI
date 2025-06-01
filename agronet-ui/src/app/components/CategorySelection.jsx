@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 const categories = [
   { img: '/assets/images/tractor.png', label: 'Inputs', action: '/inputs' },
   { img: '/assets/images/produce2.png', label: 'Produce', action: '/produce' },
-  { img: '/assets/images/prices.png', label: 'Prices', action: '/prices' },
+  { img: '/assets/images/mandi2.png', label: 'Prices', action: '/prices' },
   { img: '/assets/images/credit.png', label: 'Credit', action: '/credit' },
 ];
 

@@ -16,8 +16,11 @@ import SearchIcon from '@mui/icons-material/Search';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import CommonTopNav from '@/app/components/CommonTopNav';
 import OrderList from './OrderList';
+import { useLanguage } from '../hooks/useLanguage.js';
 
 export default function OrdersPage() {
+  const { strings } = useLanguage();
+
   return (
     <Box minHeight="100vh" bgcolor="background.default">
       <CommonTopNav />
@@ -32,7 +35,7 @@ export default function OrdersPage() {
         }}
       >
         <Typography variant="h6" fontWeight={700}>
-          Orders
+          {strings.ordersPageHeading}
         </Typography>
         <Button
           variant="outlined"
@@ -45,7 +48,7 @@ export default function OrdersPage() {
             py: 0.5,
           }}
         >
-          Filter
+          {strings.ordersPageFilter}
         </Button>
       </Box>
       <Box sx={{ px: 2, mb: 2 }}>
@@ -63,7 +66,7 @@ export default function OrdersPage() {
         >
           <SearchIcon sx={{ color: '#aaa', mr: 1 }} />
           <InputBase
-            placeholder="Search order"
+            placeholder={strings.ordersPageSearchPlaceholder}
             sx={{ flex: 1, fontSize: 16, color: '#333' }}
             inputProps={{ 'aria-label': 'search order' }}
           />

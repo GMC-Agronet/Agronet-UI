@@ -3,6 +3,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import Shimmer from '../components/Shimmer';
 import { useState, useEffect } from 'react';
+import { useLanguage } from '../hooks/useLanguage.js';
+
 
 export default function CategoryTile({ name, image, action, titleAlign }) {
   const [loading, setLoading] = useState(true);
@@ -14,14 +16,16 @@ export default function CategoryTile({ name, image, action, titleAlign }) {
   if (loading) {
     return <Shimmer type="tile" />;
   }
+    const { strings } = useLanguage();
+  
 
   return (
     <Link href={`/category-items/${name.toLowerCase()}`} passHref>
       <Box
         sx={{
-          width: '80%',
+          width: '100%',
           maxWidth: '180px',
-          height: '150px',
+          height: '160px',
           bgcolor: 'white',
           border: '1.5px solid #eee',
           boxShadow: 2,
@@ -69,8 +73,16 @@ export default function CategoryTile({ name, image, action, titleAlign }) {
           variant="body1"
           mt={1}
           align={titleAlign || 'center'}
+          sx={{
+            maxWidth: 120,
+            overflow: 'hidden',
+            textOverflow: 'ellipsis',
+            whiteSpace: 'nowrap',
+            fontWeight: 600,
+            fontSize: 16,
+          }}
         >
-          {name}
+          {strings[`inputsPage${name.replace(/\s/g, '')}`] || strings[name] || name}
         </Typography>
       </Box>
     </Link>

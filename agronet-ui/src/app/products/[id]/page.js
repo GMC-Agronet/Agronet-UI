@@ -9,11 +9,13 @@ import ProductBreadcrumbs from '@/app/components/ProductBreadcrumbs';
 import productsData from '@/app/mock/products.json';
 import { useDispatch, useSelector } from 'react-redux';
 import { addToCart } from '@/app/redux/slices/cartSlice';
+import { useLanguage } from '../../hooks/useLanguage.js';
 
 export default function ProductDetailsPage() {
   const { id } = useParams();
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.items);
+  const { strings } = useLanguage();
   // Find product by id in flat array
   const product = productsData.find((item) => String(item.id) === String(id));
   const isInCart = cartItems.some(
@@ -91,7 +93,7 @@ export default function ProductDetailsPage() {
                     marginRight: 8,
                   }}
                 >
-                  Price:
+                  {strings.productDetailsPagePrice}:
                 </span>
                 ₹{product.price} / {product.unit}
               </Typography>
@@ -116,7 +118,9 @@ export default function ProductDetailsPage() {
                   onClick={() => dispatch(addToCart(product))}
                   disabled={isInCart}
                 >
-                  {isInCart ? 'Added to Cart' : 'Add to Cart'}
+                  {isInCart
+                    ? strings.productDetailsPageAddedToCart
+                    : strings.productDetailsPageAddToCart}
                 </Button>
                 <Button
                   variant="contained"
@@ -135,7 +139,7 @@ export default function ProductDetailsPage() {
                   }}
                   onClick={() => alert(`Buying ${product.title}...`)}
                 >
-                  Buy
+                  {strings.productDetailsPageBuy}
                 </Button>
               </Box>
             </Box>
@@ -145,7 +149,7 @@ export default function ProductDetailsPage() {
       {suggestions.length > 0 && (
         <Box mt={6} px={2}>
           <Typography variant="h6" fontWeight="bold" gutterBottom>
-            You may also like
+            {strings.productDetailsPageSuggestions}
           </Typography>
           <Grid container spacing={2}>
             {suggestions.map((item, idx) => (

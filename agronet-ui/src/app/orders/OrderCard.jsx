@@ -4,6 +4,7 @@ import { Box, Typography, Paper, Avatar, Button, Divider } from '@mui/material';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import Skeleton from '@mui/material/Skeleton';
 import { useState, useEffect } from 'react';
+import { useLanguage } from '../hooks/useLanguage.js';
 
 const statusIconMap = {
   'Order Received': { color: '#2196f3', icon: '📦' },
@@ -12,8 +13,10 @@ const statusIconMap = {
 };
 
 export default function OrderCard({ order }) {
+  const { strings } = useLanguage();
   const { status, statusColor, date, product, actions } = order;
   const statusMeta = statusIconMap[status] || { color: '#bbb', icon: '📦' };
+  const statusLabel = strings[`ordersOrderList${status.replace(/ /g, '')}`] || status;
 
   // Shimmer loading state for demo
   const [loading, setLoading] = useState(true);
@@ -81,7 +84,7 @@ export default function OrderCard({ order }) {
         </Avatar>
         <Box flex={1}>
           <Typography fontWeight={700} fontSize={16} color="#222">
-            {status}
+            {statusLabel}
           </Typography>
           <Typography fontSize={13} color="#888">
             {date}
@@ -96,7 +99,7 @@ export default function OrderCard({ order }) {
             {product.title}
           </Typography>
           <Typography fontSize={13} color="#555">
-            Quantity: {product.size} &nbsp; Color: {product.color}
+            {strings.ordersOrderCardQuantity || 'Quantity'}: {strings[product.size] || product.size} &nbsp; {strings.ordersOrderCardColor || 'Color'}: {strings[product.color] || product.color}
           </Typography>
           <Typography fontSize={14} color="#357a38" fontWeight={700}>
             ₹{product.price}
@@ -121,7 +124,7 @@ export default function OrderCard({ order }) {
                 '&:hover': { bgcolor: '#f5f5f5', borderColor: '#bbb' },
               }}
             >
-              {action}
+              {strings[`ordersOrderCardAction_${action.replace(/ /g, '')}`] || action}
             </Button>
           ))}
         </Box>

@@ -26,8 +26,10 @@ import Image from 'next/image';
 import { useSelector, useDispatch } from 'react-redux';
 import { logout } from '../redux/slices/authSlice';
 import CommonTopNav from '../components/CommonTopNav';
+import { useLanguage } from '../hooks/useLanguage.js';
 
 export default function ProfilePage() {
+  const { strings } = useLanguage();
   const user = useSelector((state) => state.auth.user) || {
     name: 'Agro User',
     phone: '9123456789',
@@ -71,7 +73,7 @@ export default function ProfilePage() {
       <CommonTopNav />
       <Box sx={{ px: { xs: 2, sm: 3 }, pt: 3, pb: 1 }}>
         <Typography variant="h5" fontWeight={700} color="#183a1d" mb={2}>
-          Profile
+          {strings.profilePageHeading}
         </Typography>
         <Paper
           elevation={0}
@@ -177,38 +179,38 @@ export default function ProfilePage() {
               <ListItemIcon>
                 <GroupAddIcon color="primary" />
               </ListItemIcon>
-              <ListItemText primary="Refer a friend" />
+              <ListItemText primary={strings.profilePageReferFriend} />
             </ListItem>
             <ListItem button>
               <ListItemIcon>
                 <NotificationsIcon color="primary" />
               </ListItemIcon>
-              <ListItemText primary="Notification" />
+              <ListItemText primary={strings.profilePageNotification} />
             </ListItem>
             <ListItem button>
               <ListItemIcon>
                 <SettingsIcon color="primary" />
               </ListItemIcon>
-              <ListItemText primary="Settings" />
+              <ListItemText primary={strings.profilePageSettings} />
             </ListItem>
             <ListItem button>
               <ListItemIcon>
                 <HelpOutlineIcon color="primary" />
               </ListItemIcon>
-              <ListItemText primary="Help center" />
+              <ListItemText primary={strings.profilePageHelpCenter} />
             </ListItem>
             <ListItem button>
               <ListItemIcon>
                 <SecurityIcon color="primary" />
               </ListItemIcon>
-              <ListItemText primary="Security & privacy" />
+              <ListItemText primary={strings.profilePageSecurityPrivacy} />
             </ListItem>
             <ListItem button onClick={() => dispatch(logout())}>
               <ListItemIcon>
                 <LogoutIcon color="error" />
               </ListItemIcon>
               <ListItemText
-                primary="Log out"
+                primary={strings.profilePageLogout}
                 primaryTypographyProps={{
                   color: '#b91c1c',
                   fontWeight: 700,
@@ -220,7 +222,7 @@ export default function ProfilePage() {
         {/* Agri-specific section: My Crops */}
         <Box mt={4}>
           <Typography variant="h6" fontWeight={700} color="#183a1d" mb={1}>
-            My Crops
+            {strings.profilePageMyCrops}
           </Typography>
           <Paper
             elevation={0}
@@ -235,14 +237,14 @@ export default function ProfilePage() {
               Wheat, Rice, Maize
             </Typography>
             <Typography variant="body2" color="#888">
-              Track your crop progress, yields, and market prices here.
+              {strings.profilePageTrackCrops}
             </Typography>
           </Paper>
         </Box>
         {/* Agri-specific section: Support */}
         <Box mt={3}>
           <Typography variant="h6" fontWeight={700} color="#183a1d" mb={1}>
-            Support
+            {strings.profilePageSupport}
           </Typography>
           <Paper
             elevation={0}
@@ -254,11 +256,10 @@ export default function ProfilePage() {
             }}
           >
             <Typography color="#357a38" fontWeight={600}>
-              Need help with your farm or orders?
+              {strings.profilePageNeedHelp}
             </Typography>
             <Typography variant="body2" color="#888">
-              Contact our agri-experts for advice, order issues, or technical
-              support.
+              {strings.profilePageContactExperts}
             </Typography>
           </Paper>
         </Box>

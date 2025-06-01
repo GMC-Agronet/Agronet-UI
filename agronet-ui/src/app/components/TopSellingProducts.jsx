@@ -2,6 +2,7 @@ import React from 'react';
 import { Box, Typography, Button, Grid } from '@mui/material';
 import ProductCard from './ProductCard';
 import Shimmer from './Shimmer';
+import { useLanguage } from '../hooks/useLanguage.js';
 
 const topSellingProducts = [
 	{
@@ -31,6 +32,7 @@ const topSellingProducts = [
 ];
 
 const TopSellingProducts = ({ loading }) => {
+	const { strings } = useLanguage();
 	return (
 		<Box p={2}>
 			<Box
@@ -40,11 +42,13 @@ const TopSellingProducts = ({ loading }) => {
 				mb={2}
 			>
 				<Typography variant="subtitle1" fontWeight="bold">
-					Top selling products
+					{strings.topSellingProductsTitle || 'Top selling products'}
 				</Typography>
-				<Button size="small">View All</Button>
+				<Button size="small">
+					{strings.topSellingProductsViewAll || 'View All'}
+				</Button>
 			</Box>
-			<Grid container spacing={2}>
+			<Grid container spacing={1}>
 				{loading ? (
 					<Shimmer type="card" count={4} />
 				) : (
@@ -52,7 +56,7 @@ const TopSellingProducts = ({ loading }) => {
 						<Grid
 							item
 							xs={12}
-							sm={6}
+							sm={4}
 							md={4}
 							key={idx}
 							display="flex"

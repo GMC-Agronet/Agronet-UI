@@ -4,9 +4,11 @@ import { Box, Typography, Button } from '@mui/material';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { useEffect } from 'react';
+import { useLanguage } from '../hooks/useLanguage.js';
 
 export default function LandingPage() {
   const router = useRouter();
+  const { strings } = useLanguage();
   useEffect(() => {
     // Prevent scroll on landing page
     const originalHtmlOverflow = document.documentElement.style.overflow;
@@ -68,7 +70,8 @@ export default function LandingPage() {
             lineHeight: 1.4,
           }}
         >
-          Building the Digital Future for Sustainable Agriculture
+          {strings.landingPageHeading ||
+            'Building the Digital Future for Sustainable Agriculture'}
         </Typography>
         <Button
           variant="contained"
@@ -87,7 +90,7 @@ export default function LandingPage() {
           }}
           onClick={() => router.push('/dashboard')}
         >
-          Explore Now
+          {strings.landingPageExploreNow || 'Explore Now'}
         </Button>
       </Box>
       {/* Overlay for darkening the background image */}

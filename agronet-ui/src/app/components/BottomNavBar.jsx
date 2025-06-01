@@ -9,9 +9,11 @@ import PersonIcon from '@mui/icons-material/Person';
 import AgricultureIcon from '@mui/icons-material/Agriculture';
 import { useRouter } from 'next/navigation';
 import { useSelector } from 'react-redux';
+import { useLanguage } from '../hooks/useLanguage.js';
 
 
 const BottomNavBar = () => { 
+    const { strings } = useLanguage();
     const router = useRouter();
     const isLoggedIn = useSelector(state => state.auth.isLoggedIn);
     return <Box
@@ -26,7 +28,7 @@ const BottomNavBar = () => {
         }}
       >
         <BottomNavigation showLabels>
-          <BottomNavigationAction label="Home" icon={<HomeIcon />} onClick={() => router.push('/dashboard')} sx={{
+          <BottomNavigationAction label={strings.bottomNavHome} icon={<HomeIcon />} onClick={() => router.push('/dashboard')} sx={{
             borderRadius: 2,
             transition: 'box-shadow 0.2s, transform 0.15s',
             '&:active': {
@@ -38,7 +40,7 @@ const BottomNavBar = () => {
             },
           }} />
           {isLoggedIn && (
-            <BottomNavigationAction label="My Orders" icon={<ListAltIcon />} onClick={() => router.push('/orders')} sx={{
+            <BottomNavigationAction label={strings.bottomNavOrders} icon={<ListAltIcon />} onClick={() => router.push('/orders')} sx={{
               borderRadius: 2,
               transition: 'box-shadow 0.2s, transform 0.15s',
               '&:active': {
@@ -51,7 +53,7 @@ const BottomNavBar = () => {
             }} />
           )}
           {isLoggedIn && (
-            <BottomNavigationAction label="My Crop" icon={<AgricultureIcon />} onClick={() => router.push('/mycrop')} sx={{
+            <BottomNavigationAction label={strings.bottomNavInputs} icon={<AgricultureIcon />} onClick={() => router.push('/mycrop')} sx={{
               borderRadius: 2,
               transition: 'box-shadow 0.2s, transform 0.15s',
               '&:active': {
@@ -63,7 +65,7 @@ const BottomNavBar = () => {
               },
             }} />
           )}
-          <BottomNavigationAction label="Profile" icon={<PersonIcon />} onClick={() => {
+          <BottomNavigationAction label={strings.bottomNavProfile} icon={<PersonIcon />} onClick={() => {
   if (isLoggedIn) {
     router.push('/profile');
   } else {
@@ -83,7 +85,7 @@ const BottomNavBar = () => {
     boxShadow: 4,
   },
 }} />
-          <BottomNavigationAction label="Support" icon={<SupportAgentIcon />} sx={{
+          <BottomNavigationAction label={strings.bottomNavSupport} icon={<SupportAgentIcon />} sx={{
             borderRadius: 2,
             transition: 'box-shadow 0.2s, transform 0.15s',
             '&:active': {

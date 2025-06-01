@@ -2,13 +2,15 @@ import React from 'react';
 import { Box, TextField, InputAdornment, IconButton } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import MicIcon from '@mui/icons-material/Mic';
+import { useLanguage } from '../hooks/useLanguage.js';
 
 
 const LandingPageSearchBar = () => {
-return <Box mt={3}>
+  const { strings } = useLanguage();
+  return <Box mt={3}>
           <TextField
             fullWidth
-            placeholder="Search products here"
+            placeholder={strings.landingPageSearchPlaceholder || 'Search products here'}
             variant="outlined"
             InputProps={{
               startAdornment: (
