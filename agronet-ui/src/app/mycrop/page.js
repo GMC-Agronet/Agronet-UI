@@ -17,6 +17,7 @@ import AgricultureIcon from '@mui/icons-material/Agriculture';
 import PlaceIcon from '@mui/icons-material/Place';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import CommonTopNav from '../components/CommonTopNav';
+import { useLanguage } from '../hooks/useLanguage.js';
 
 const cropOptions = [
   'Wheat',
@@ -31,6 +32,7 @@ const cropOptions = [
 ];
 
 export default function MyCropPage() {
+  const { strings } = useLanguage();
   const [crops, setCrops] = useState([]);
   const [form, setForm] = useState({
     crop: '',
@@ -53,11 +55,11 @@ export default function MyCropPage() {
       !form.date ||
       !form.location
     ) {
-      setError('Please fill all fields.');
+      setError(strings.mycropPageErrorFillAllFields);
       return;
     }
     if (crops.length >= 4) {
-      setError('You can register up to 4 crops per season.');
+      setError(strings.mycropPageErrorMaxCrops);
       return;
     }
     setCrops([...crops, form]);
@@ -80,7 +82,7 @@ export default function MyCropPage() {
       <CommonTopNav />
       <Box sx={{ maxWidth: 1100, mx: 'auto', mt: 4, p: { xs: 1, sm: 2 } }}>
         <Typography variant="h4" fontWeight={800} color="#183a1d" mb={3} pl={1}>
-          My Crops
+          {strings.mycropPageTitle}
         </Typography>
         <Grid
           container
@@ -110,9 +112,9 @@ export default function MyCropPage() {
                 color="#357a38"
                 sx={{ fontSize: { xs: 20, sm: 22 } }}
               >
-                Register a Crop{' '}
+                {strings.mycropPageRegisterCrop}{' '}
                 <Chip
-                  label="up to 4 per season"
+                  label={strings.mycropPageUpTo4PerSeason}
                   size="small"
                   sx={{
                     ml: 1,
@@ -135,7 +137,7 @@ export default function MyCropPage() {
                 >
                   <TextField
                     select
-                    label="Crop"
+                    label={strings.mycropPageCropLabel}
                     name="crop"
                     value={form.crop}
                     onChange={handleChange}
@@ -149,7 +151,7 @@ export default function MyCropPage() {
                           sx={{ mr: 1, color: '#357a38' }}
                           fontSize="small"
                         />{' '}
-                        {option}
+                        {strings[`mycropCrop_${option}`] || option}
                       </MenuItem>
                     ))}
                   </TextField>
@@ -165,7 +167,7 @@ export default function MyCropPage() {
                   }}
                 >
                   <TextField
-                    label="Area (acres)"
+                    label={strings.mycropPageArea || 'Area (acres)'}
                     name="area"
                     value={form.area}
                     onChange={handleChange}
@@ -173,6 +175,7 @@ export default function MyCropPage() {
                     fullWidth
                     required
                     inputProps={{ min: 0, step: 0.01 }}
+                    placeholder={strings.mycropPageArea || 'Area (acres)'}
                     sx={{
                       bgcolor: '#f7faf7',
                       borderRadius: 2,
@@ -192,12 +195,13 @@ export default function MyCropPage() {
                   }}
                 >
                   <TextField
-                    label="Variety"
+                    label={strings.mycropPageVariety || 'Variety'}
                     name="variety"
                     value={form.variety}
                     onChange={handleChange}
                     fullWidth
                     required
+                    placeholder={strings.mycropPageVariety || 'Variety'}
                     sx={{
                       bgcolor: '#f7faf7',
                       borderRadius: 2,
@@ -217,7 +221,7 @@ export default function MyCropPage() {
                   }}
                 >
                   <TextField
-                    label="Date of Sowing"
+                    label={strings.mycropPageDateOfSowingLabel}
                     name="date"
                     type="date"
                     value={form.date}
@@ -225,7 +229,9 @@ export default function MyCropPage() {
                     fullWidth
                     required
                     InputLabelProps={{ shrink: true }}
-                    helperText={!form.date ? 'Select date (yyyy-mm-dd)' : ''}
+                    helperText={
+                      !form.date ? strings.mycropPageDatePlaceholder : ''
+                    }
                     sx={{ height: '100%' }}
                   />
                 </Grid>
@@ -239,12 +245,13 @@ export default function MyCropPage() {
                   }}
                 >
                   <TextField
-                    label="Location"
+                    label={strings.mycropPageLocation || 'Location'}
                     name="location"
                     value={form.location}
                     onChange={handleChange}
                     fullWidth
                     required
+                    placeholder={strings.mycropPageLocation || 'Location'}
                     InputProps={{
                       startAdornment: (
                         <PlaceIcon
@@ -295,7 +302,7 @@ export default function MyCropPage() {
                 onClick={handleAddCrop}
                 disabled={crops.length >= 4}
               >
-                Add Crop
+                {strings.mycropPageAddCropButton}
               </Button>
             </Paper>
           </Grid>
@@ -318,7 +325,7 @@ export default function MyCropPage() {
               }}
             >
               <Typography variant="h6" fontWeight={700} color="#357a38" mb={2}>
-                Registered Crops
+                {strings.mycropPageRegisteredCrops || 'Registered Crops'}
               </Typography>
               {/* Use hr for divider to avoid import issues */}
               <Box
@@ -327,7 +334,7 @@ export default function MyCropPage() {
               />
               {crops.length === 0 ? (
                 <Typography color="#888" mb={2}>
-                  No crops registered yet.
+                  {strings.mycropPageNoCrops || 'No crops registered yet.'}
                 </Typography>
               ) : (
                 <Grid container spacing={2}>
@@ -369,7 +376,7 @@ export default function MyCropPage() {
                             color="#183a1d"
                             fontSize={18}
                           >
-                            {crop.crop}
+                            {strings[`mycropCrop_${crop.crop}`] || crop.crop}
                           </Typography>
                           <Chip
                             label={crop.variety}

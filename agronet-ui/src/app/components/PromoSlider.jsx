@@ -2,32 +2,34 @@ import { useState, useEffect } from 'react';
 import { Box, Typography, Button, IconButton, Fade } from '@mui/material';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import { useLanguage } from '../hooks/useLanguage.js';
 
 const slides = [
   {
-    title: 'Summer Season Special',
-    description: '15% off on all seeds and fertilizers. Stock up now for the season!',
+    titleKey: 'promoSliderSummerTitle',
+    descriptionKey: 'promoSliderSummerDesc',
+    buttonKey: 'promoSliderSummerBtn',
     image: '/assets/images/inputs/seeds.png',
-    button: 'Shop Now',
     bg: 'linear-gradient(135deg, #43cea2 0%, #185a9d 100%)', // blue-green
   },
   {
-    title: 'Monsoon Bonanza',
-    description: 'Exclusive deals on crop protection. Prepare for the rains!',
+    titleKey: 'promoSliderMonsoonTitle',
+    descriptionKey: 'promoSliderMonsoonDesc',
+    buttonKey: 'promoSliderMonsoonBtn',
     image: '/assets/images/tractor.png',
-    button: 'Explore',
     bg: 'linear-gradient(135deg, #ff5858 0%, #f09819 100%)', // red-orange
   },
   {
-    title: 'AgroNet Rewards',
-    description: 'Earn points on every purchase. Redeem for rewards.',
+    titleKey: 'promoSliderRewardsTitle',
+    descriptionKey: 'promoSliderRewardsDesc',
+    buttonKey: 'promoSliderRewardsBtn',
     image: '/assets/images/inputs/growth.png',
-    button: 'Learn More',
     bg: 'linear-gradient(135deg, #11998e 0%, #38ef7d 100%)', // green
   },
 ];
 
 export default function PromoSlider() {
+  const { strings } = useLanguage();
   const [index, setIndex] = useState(0);
 
   // Auto-advance every 5 seconds
@@ -93,17 +95,17 @@ export default function PromoSlider() {
           {/* Content */}
           <Box sx={{ position: 'relative', zIndex: 3, p: 4, maxWidth: 340 }}>
             <Typography variant="h5" fontWeight="bold" mb={2} mt={1}>
-              {slides[index].title}
+              {strings[slides[index].titleKey]}
             </Typography>
             <Typography variant="body1" mb={3}>
-              {slides[index].description}
+              {strings[slides[index].descriptionKey]}
             </Typography>
             <Button
               variant="contained"
               color="inherit"
               sx={{ bgcolor: 'white', color: 'success.main', fontWeight: 600, width: 160 }}
             >
-              {slides[index].button}
+              {strings[slides[index].buttonKey]}
             </Button>
           </Box>
           {/* Navigation Arrows */}

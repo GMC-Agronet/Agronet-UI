@@ -23,6 +23,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogActions from '@mui/material/DialogActions';
 import Button from '@mui/material/Button';
 import { logout } from './redux/slices/authSlice';
+import { LanguageProvider } from './hooks/useLanguage.js';
 
 const queryClient = new QueryClient();
 
@@ -39,17 +40,25 @@ export default function RootLayout({ children }) {
       </head>
       <body>
         <div className="agronet-gradient-bg">
-          <ReduxProvider store={store}>
-            <QueryClientProvider client={queryClient}>
-              <ThemeProvider theme={theme}>
-                <LayoutContent>{children}</LayoutContent>
-              </ThemeProvider>
-              <ReactQueryDevtools initialIsOpen={false} />
-            </QueryClientProvider>
-          </ReduxProvider>
+          <LanguageProvider>
+            <AppProviders>{children}</AppProviders>
+          </LanguageProvider>
         </div>
       </body>
     </html>
+  );
+}
+
+function AppProviders({ children }) {
+  return (
+    <ReduxProvider store={store}>
+      <QueryClientProvider client={queryClient}>
+        <ThemeProvider theme={theme}>
+          <LayoutContent>{children}</LayoutContent>
+        </ThemeProvider>
+        <ReactQueryDevtools initialIsOpen={false} />
+      </QueryClientProvider>
+    </ReduxProvider>
   );
 }
 
@@ -111,9 +120,12 @@ function LayoutContent({ children }) {
     let timer;
     const resetTimer = () => {
       clearTimeout(timer);
-      timer = setTimeout(() => {
-        dispatch(logout());
-      }, 2 * 60 * 1000); // 2 minutes
+      timer = setTimeout(
+        () => {
+          dispatch(logout());
+        },
+        2 * 60 * 1000,
+      ); // 2 minutes
     };
     const events = ['mousemove', 'keydown', 'mousedown', 'touchstart'];
     events.forEach((event) => window.addEventListener(event, resetTimer));

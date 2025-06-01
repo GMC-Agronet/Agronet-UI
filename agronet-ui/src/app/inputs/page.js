@@ -6,58 +6,68 @@ import CategoryTile from '@/app/components/CategoryTile';
 import CommonTopNav from '@/app/components/CommonTopNav';
 import Shimmer from '../components/Shimmer';
 import { useState, useEffect } from 'react';
+import { useLanguage } from '../hooks/useLanguage.js';
 
 const inputCategories = [
-  { name: 'Offers', image: '/assets/images/seeds.png', action: '/offers' },
   {
-    name: 'Herbicides',
+    name: 'inputsPageOffers',
+    image: '/assets/images/seeds.png',
+    action: '/offers',
+  },
+  {
+    name: 'inputsPageHerbicides',
     image: '/assets/images/inputs/herb.png',
     action: '/herbicides',
   },
   {
-    name: 'Growth Promoters',
+    name: 'inputsPageGrowthPromoters',
     image: '/assets/images/inputs/herb.png',
     action: '/growth-promoters',
   },
   {
-    name: 'Fungicides',
+    name: 'inputsPageFungicides',
     image: '/assets/images/inputs/fungicide.png',
     action: '/fungicides',
   },
-  { name: 'Seeds', image: '/assets/images/inputs/seeds.png', action: '/seeds' },
   {
-    name: 'Farm Machinery',
+    name: 'inputsPageSeeds',
+    image: '/assets/images/inputs/seeds.png',
+    action: '/seeds',
+  },
+  {
+    name: 'inputsPageFarmMachinery',
     image: '/assets/images/inputs/machine.png',
     action: '/farm-machinery',
   },
   {
-    name: 'Pesticides',
+    name: 'inputsPagePesticides',
     image: '/assets/images/inputs/pesticide.png',
     action: '/pesticides',
   },
   {
-    name: 'Poultry Feed',
+    name: 'inputsPagePoultryFeed',
     image: '/assets/images/inputs/poultry.png',
     action: '/poultry-feed',
   },
   {
-    name: 'Cattle Feed',
+    name: 'inputsPageCattleFeed',
     image: '/assets/images/inputs/cattle.png',
     action: '/cattle-feed',
   },
   {
-    name: 'Dairy Products',
+    name: 'inputsPageDairyProducts',
     image: '/assets/images/seeds.png',
     action: '/dairy-products',
   },
   {
-    name: 'Organic Farming',
+    name: 'inputsPageOrganicFarming',
     image: '/assets/images/inputs/organic.png',
     action: '/organic-farming',
   },
 ];
 
 export default function InputsPage() {
+  const { strings } = useLanguage();
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     const timer = setTimeout(() => setLoading(false), 900);
@@ -77,7 +87,7 @@ export default function InputsPage() {
       <CommonTopNav />
 
       <Typography variant="h5" fontWeight="bold" mt={4} ml={2}>
-        Categories
+        {strings.inputsPageCategories}
       </Typography>
       <Grid
         container

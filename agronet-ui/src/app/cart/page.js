@@ -22,8 +22,10 @@ import CommonTopNav from '@/app/components/CommonTopNav';
 import { useState } from 'react';
 import Checkbox from '@mui/material/Checkbox';
 import Link from 'next/link';
+import { useLanguage } from '../hooks/useLanguage.js';
 
 export default function CartPage() {
+  const { strings } = useLanguage();
   const cartItems = useSelector((state) => state.cart.items);
   const dispatch = useDispatch();
   const total = cartItems.reduce(
@@ -48,7 +50,7 @@ export default function CartPage() {
               sx={{ fontSize: 120, color: 'secondary.main', mb: 2 }}
             />
             <Typography variant="h6" fontWeight={500} mb={2}>
-              No Products Added to Cart
+              {strings.cartPageNoProducts}
             </Typography>
             <Link href="/dashboard" passHref legacyBehavior>
               <Button
@@ -61,7 +63,7 @@ export default function CartPage() {
                   py: 1,
                 }}
               >
-                Continue Shopping
+                {strings.continueShopping}
               </Button>
             </Link>
           </Box>
@@ -98,10 +100,10 @@ export default function CartPage() {
                     {item.title}
                   </Typography>
                   <Typography fontSize={14} color="text.secondary" mb={0.5}>
-                    Size <b>{item.unit}</b>
+                    {strings.cartPageSize} <b>{item.unit}</b>
                   </Typography>
                   <Typography fontSize={15} mb={1}>
-                    Price <b>₹{item.price}</b>
+                    {strings.cartPagePrice} <b>₹{item.price}</b>
                   </Typography>
                   <Box display="flex" alignItems="center" gap={1}>
                     <IconButton
@@ -148,7 +150,7 @@ export default function CartPage() {
                       }}
                       onClick={() => dispatch(removeFromCart(item.id))}
                     >
-                      Remove
+                      {strings.cartPageRemove}
                     </Button>
                   </Box>
                 </Box>
@@ -162,7 +164,7 @@ export default function CartPage() {
                 color="success"
               />
               <Typography variant="body2">
-                I accept the{' '}
+                {strings.cartPageAcceptTerms}{' '}
                 <Link
                   href="#"
                   style={{
@@ -170,13 +172,13 @@ export default function CartPage() {
                     textDecoration: 'underline',
                   }}
                 >
-                  terms and conditions
+                  {strings.cartPageTermsAndConditions}
                 </Link>
               </Typography>
             </Box>
             <Box bgcolor="#f5f6f7" p={2} borderRadius={2} mb={2}>
               <Typography variant="h6" fontWeight="bold" mb={1}>
-                Sub Total
+                {strings.cartPageSubTotal}
                 <span style={{ float: 'right' }}>₹{total}</span>
               </Typography>
               <Button
@@ -190,7 +192,7 @@ export default function CartPage() {
                 }}
                 disabled={!acceptTerms}
               >
-                Proceed
+                {strings.cartPageProceed}
               </Button>
               <Typography
                 variant="caption"
@@ -198,7 +200,7 @@ export default function CartPage() {
                 display="block"
                 mt={1}
               >
-                Shipping, taxes and discount codes calculated at checkout.
+                {strings.cartPageShippingInfo}
               </Typography>
             </Box>
           </>

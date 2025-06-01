@@ -1,4 +1,4 @@
-import { Drawer, Box, List, ListItem, ListItemText, ListItemIcon, IconButton, Typography } from '@mui/material';
+import { Drawer, Box, List, ListItem, ListItemText, ListItemIcon, IconButton, Typography, MenuItem, Select, FormControl, InputLabel } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import PersonIcon from '@mui/icons-material/Person';
 import SettingsIcon from '@mui/icons-material/Settings';
@@ -12,6 +12,7 @@ import AgricultureIcon from '@mui/icons-material/Agriculture';
 import { useSelector, useDispatch } from 'react-redux';
 import { logout } from '../redux/slices/authSlice';
 import { useRouter } from 'next/navigation';
+import { useLanguage } from '../hooks/useLanguage.js';
 
 const menuItems = [
   { label: 'Profile', icon: <PersonIcon /> },
@@ -28,6 +29,7 @@ export default function SideNav({ isOpen, onClose }) {
   const isLoggedIn = useSelector(state => state.auth.isLoggedIn);
   const dispatch = useDispatch();
   const router = useRouter();
+  const { language, setLanguage, strings } = useLanguage();
 
   const handleLogout = () => {
     dispatch(logout());
@@ -37,15 +39,33 @@ export default function SideNav({ isOpen, onClose }) {
   return (
     <Drawer anchor="right" open={isOpen} onClose={onClose} PaperProps={{ sx: { bgcolor: 'primary.main', borderTopLeftRadius: 40, borderBottomLeftRadius: 40, width: 340, boxShadow: 8 } }}>
       <Box sx={{ height: '100%', display: 'flex', flexDirection: 'column', p: 0 }}>
-        {/* Top section with logo and close */}
         <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', px: 3, pt: 2 }}>
-          {/* <Box sx={{ bgcolor: 'white', borderRadius: '0 0 18px 0', px: 2.5, py: 0.7, fontWeight: 900, fontSize: 26, color: '#222', boxShadow: 2, letterSpacing: 0.5, display: 'flex', alignItems: 'center', height: 44 }}> */}
           <Box sx={{ }}>
-            {/* <img src="/assets/images/gmclogo.svg" alt="GMC AgroNet Logo" style={{ height: 32, width: 'auto', display: 'block' }} /> */}
           </Box>
           <IconButton onClick={onClose} sx={{ color: 'white', bgcolor: 'rgba(0,0,0,0.08)', ml: 1 }}>
             <CloseIcon />
           </IconButton>
+        </Box>
+        <Box sx={{ px: 3, pt: 1 }}>
+          <FormControl fullWidth size="small" variant="outlined">
+            <InputLabel sx={{ color: 'white' }}>{strings['Language'] || 'Language'}</InputLabel>
+            <Select
+              value={language}
+              onChange={e => setLanguage(e.target.value)}
+              label={strings['Language'] || 'Language'}
+              sx={{
+                color: 'white',
+                bgcolor: 'primary.light',
+                borderRadius: 2,
+                mt: 1,
+                '.MuiOutlinedInput-notchedOutline': { borderColor: 'white' },
+                '& .MuiSvgIcon-root': { color: 'white' },
+              }}
+            >
+              <MenuItem value="en">{strings['English'] || 'English'}</MenuItem>
+              <MenuItem value="te">{strings['Telugu'] || 'Telugu'}</MenuItem>
+            </Select>
+          </FormControl>
         </Box>
         {/* User info */}
         {isLoggedIn && user && (
@@ -88,13 +108,13 @@ export default function SideNav({ isOpen, onClose }) {
                   }}
                 >
                   <ListItemIcon sx={{ color: 'primary.light', minWidth: 36, fontSize: 22, '&:hover': { bgcolor: 'primary.light', color: '#fff' } }}>{item.icon}</ListItemIcon>
-                  <ListItemText primary={item.label} primaryTypographyProps={{ fontWeight: 600, fontSize: 18 }} />
+                  <ListItemText primary={strings[item.label] || item.label} primaryTypographyProps={{ fontWeight: 600, fontSize: 18 }} />
                 </ListItem>
               ))
             ) : (
               <ListItem button onClick={() => { onClose(); window.location.href = '/login'; }} sx={{ py: 2.1, px: 4, borderRadius: 3, color: 'primary.light', fontWeight: 600, fontSize: 18 }}>
                   <ListItemIcon sx={{ color: 'primary.light', minWidth: 36, fontSize: 22 }}><LogoutIcon /></ListItemIcon>
-                <ListItemText primary="Login" primaryTypographyProps={{ fontWeight: 600, fontSize: 18 }} />
+                <ListItemText primary={strings['Login'] || 'Login'} primaryTypographyProps={{ fontWeight: 600, fontSize: 18 }} />
               </ListItem>
             )}
           </List>
