@@ -23,7 +23,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogActions from '@mui/material/DialogActions';
 import Button from '@mui/material/Button';
 import { logout } from './redux/slices/authSlice';
-import { LanguageProvider } from './hooks/useLanguage.js';
+import { LanguageProvider, useLanguage } from './hooks/useLanguage.js';
 
 const queryClient = new QueryClient();
 
@@ -34,7 +34,7 @@ export default function RootLayout({ children }) {
       <head>
         <style>{`
           html, body, * {
-            font-family: 'Mulish', sans-serif !important;
+            font-family: var(--agronet-font, 'Mulish', sans-serif) !important;
           }
         `}</style>
       </head>
@@ -50,6 +50,26 @@ export default function RootLayout({ children }) {
 }
 
 function AppProviders({ children }) {
+  const { language } = useLanguage();
+  useEffect(() => {
+    if (language === 'te') {
+      const link = document.createElement('link');
+      link.href =
+        'https://fonts.googleapis.com/css2?family=Suranna&display=swap';
+      link.rel = 'stylesheet';
+      link.id = 'suranna-font';
+      document.head.appendChild(link);
+      document.body.style.setProperty(
+        '--agronet-font',
+        "'Suranna', Mulish, sans-serif",
+      );
+    } else {
+      const suranna = document.getElementById('suranna-font');
+      if (suranna) suranna.remove();
+      document.body.style.setProperty('--agronet-font', "'Mulish', sans-serif");
+    }
+  }, [language]);
+
   return (
     <ReduxProvider store={store}>
       <QueryClientProvider client={queryClient}>

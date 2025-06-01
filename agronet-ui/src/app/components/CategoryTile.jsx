@@ -7,20 +7,27 @@ import { useLanguage } from '../hooks/useLanguage.js';
 
 
 export default function CategoryTile({ name, image, action, titleAlign }) {
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false); // Only set to true if you want shimmer for async data
   useEffect(() => {
     const timer = setTimeout(() => setLoading(false), 900);
     return () => clearTimeout(timer);
   }, []);
+  const { strings } = useLanguage();
+  // Ensure linkHref always starts with '/category-items/'
+  let linkHref;
+  if (action) {
+    linkHref = action.startsWith('/category-items/') ? action : `/category-items/${action.replace(/^\//, '')}`;
+  } else {
+    linkHref = `/category-items/${name.toLowerCase().replace(/\s/g, '-')}`;
+  }
 
   if (loading) {
     return <Shimmer type="tile" />;
   }
-    const { strings } = useLanguage();
   
 
   return (
-    <Link href={`/category-items/${name.toLowerCase()}`} passHref>
+    <Link href={linkHref} passHref>
       <Box
         sx={{
           width: '100%',
