@@ -1,13 +1,17 @@
 import React from "react";
-import { Box, Grid, Paper, Typography } from "@mui/material";
+import { Box, Grid, Typography } from "@mui/material";
 import { useRouter } from "next/navigation";
 import { useLanguage } from '../hooks/useLanguage.js';
+import AgricultureIcon from '@mui/icons-material/Agriculture';
+import CompostOutlinedIcon from '@mui/icons-material/CompostOutlined';
+import TrendingUpOutlinedIcon from '@mui/icons-material/TrendingUpOutlined';
+import CreditScoreIcon from '@mui/icons-material/CreditScore';
 
 const categories = [
-  { img: '/assets/images/tractor.png', label: 'inputsPageInputs', action: '/inputs' },
-  { img: '/assets/images/produce2.png', label: 'inputsPageProduce', action: '/produce' },
-  { img: '/assets/images/mandi2.png', label: 'inputsPagePrices', action: '/prices' },
-  { img: '/assets/images/credit.png', label: 'inputsPageCredit', action: '/credit' },
+  { icon: <AgricultureIcon sx={{ fontSize: 38, color: 'primary.main' }} />, label: 'inputsPageInputs', action: '/inputs' },
+  { icon: <CompostOutlinedIcon sx={{ fontSize: 38, color: 'primary.main' }} />, label: 'inputsPageProduce', action: '/produce' },
+  { icon: <TrendingUpOutlinedIcon sx={{ fontSize: 38, color: 'primary.main' }} />, label: 'inputsPagePrices', action: '/prices' },
+  { icon: <CreditScoreIcon sx={{ fontSize: 38, color: 'primary.main' }} />, label: 'inputsPageCredit', action: '/credit' },
 ];
 
 const CategorySelection = () => {
@@ -19,33 +23,39 @@ const CategorySelection = () => {
   };
 
   return (
-    <Grid container spacing={2} p={1} wrap="nowrap">
+    <Grid container spacing={2} p={1} justifyContent="center" alignItems="center">
       {categories.map((card, idx) => (
-        <Grid item key={idx} sx={{ width: '100%' }}>
-          <Paper
+        <Grid item xs={6} key={idx} sx={{ display: 'flex', justifyContent: 'center', mb: 2 }}>
+          <Box
+            onClick={() => handleCategoryClick(card.action)}
             sx={{
-              height: 90,
+              width: '40vw',
+              minWidth: 140,
+              maxWidth: 220,
+              height: 60,
               display: 'flex',
-              flexDirection: 'column',
               alignItems: 'center',
-              justifyContent: 'center',
-              p: 1,
-              textAlign: 'center',
-              borderRadius: 40,
-              cursor: 'pointer', 
+              borderRadius: 3,
+              boxShadow: 2,
+              bgcolor: 'white',
+              cursor: 'pointer',
+              transition: 'box-shadow 0.2s',
+              '&:hover': { boxShadow: 6, bgcolor: '#f5f5f5' },
+              overflow: 'hidden',
             }}
-            onClick={() => handleCategoryClick(card.action)} 
           >
-            <Box
-              component="img"
-              src={card.img}
-              sx={{ width: 150, height: 120, objectFit: 'contain', mb: 1 }}
-            />
-            
-          </Paper>
-          <Typography variant="subtitle2" fontWeight="bold" color="primary" align="center" mt={1}>
+            <Box sx={{ width: 48, height: 48, display: 'flex', alignItems: 'center', justifyContent: 'center', ml: 2, mr: 2 }}>
+              {card.icon}
+            </Box>
+            <Typography
+              variant="subtitle1"
+              fontWeight="bold"
+              color="primary"
+              sx={{ width: '80%', textAlign: 'left', fontSize: 18, pl: 1, letterSpacing: 0.2 }}
+            >
               {strings[card.label] || card.label}
             </Typography>
+          </Box>
         </Grid>
       ))}
     </Grid>

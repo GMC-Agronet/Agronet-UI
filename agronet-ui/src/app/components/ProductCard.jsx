@@ -159,32 +159,14 @@ export default function ProductCard({
                 </Box>
               </Box>
             )}
-            {/* Size dropdown */}
+            {/* Size display */}
             <Box sx={{ display: 'flex', alignItems: 'center', mt: 1 }}>
               <Typography variant="body2" sx={{ fontWeight: 700, mr: 1 }}>
                 Size
               </Typography>
-              <select
-                value={selectedSize}
-                onChange={e => setSelectedSize(e.target.value)}
-                style={{
-                  border: '1px solid #ddd',
-                  borderRadius: 6,
-                  padding: '2px 8px',
-                  fontSize: 15,
-                  minWidth: 70,
-                  background: '#fff',
-                  color: '#333',
-                  textTransform: 'capitalize',
-                  fontWeight: 600,
-                }}
-              >
-                {(sizes.length ? sizes : [unit]).map((sz) => (
-                  <option key={sz} value={sz} style={{ textTransform: 'capitalize', fontWeight: 600 }}>
-                    {sz}
-                  </option>
-                ))}
-              </select>
+              <Typography variant="body2" sx={{ fontWeight: 600, textTransform: 'capitalize', color: '#357a38' }}>
+                {selectedSize}
+              </Typography>
             </Box>
           </Box>
           {/* Add to Cart button */}
