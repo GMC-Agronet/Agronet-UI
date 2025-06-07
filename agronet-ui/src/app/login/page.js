@@ -7,11 +7,16 @@ import {
   TextField,
   Typography,
   InputAdornment,
+  FormControl,
+  Select,
+  MenuItem,
 } from '@mui/material';
 import { useRouter } from 'next/navigation';
 import { useDispatch } from 'react-redux';
 import { login } from '../redux/slices/authSlice';
 import Image from 'next/image';
+import SideNav from '../components/SideNav';
+import { useLanguage } from '../hooks/useLanguage.js';
 
 // Check icon SVG
 const CheckIcon = ({ className }) => (
@@ -27,6 +32,7 @@ const CheckIcon = ({ className }) => (
 );
 
 export default function LoginPage() {
+  const { strings, language, setLanguage } = useLanguage();
   const [phone, setPhone] = useState('');
   const [valid, setValid] = useState(false);
   const [otpSent, setOtpSent] = useState(false);
@@ -47,9 +53,11 @@ export default function LoginPage() {
   }, []);
 
   const validatePhone = (value) => {
-    const isValid = /^[6-9]\d{9}$/.test(value);
+    // Only allow numbers and max 10 digits
+    const numericValue = value.replace(/[^0-9]/g, '').slice(0, 10);
+    const isValid = /^[6-9]\d{9}$/.test(numericValue);
     setValid(isValid);
-    setPhone(value);
+    setPhone(numericValue);
   };
 
   const handleSendOtp = () => {
@@ -70,16 +78,38 @@ export default function LoginPage() {
       display="flex"
       alignItems="center"
       justifyContent="center"
-      sx={{
-        //background: 'linear-gradient(135deg, #6ee7b7 0%, #3b82f6 100%)',
-        overflow: 'hidden',
-      }}
+      sx={{ overflow: 'hidden' }}
     >
+      {/* Language dropdown at top right */}
+      <Box sx={{ position: 'absolute', top: 18, right: 18, zIndex: 10 }}>
+        <FormControl
+          size="small"
+          sx={{
+            minWidth: 120,
+            bgcolor: 'white',
+            borderRadius: 2,
+            boxShadow: 1,
+          }}
+        >
+          <Select
+            value={language}
+            onChange={(e) => setLanguage(e.target.value)}
+            displayEmpty
+            inputProps={{ 'aria-label': 'Language' }}
+          >
+            <MenuItem value="en">English</MenuItem>
+            <MenuItem value="te">తెలుగు</MenuItem>
+          </Select>
+        </FormControl>
+      </Box>
       {/* Full-page background overlay image */}
       <Box
         sx={{
           position: 'absolute',
           inset: 0,
+          bgcolor: 'rgba(0,0,0,0.18)',
+          zIndex: 1,
+
           width: '100vw',
           height: '100vh',
           zIndex: 0,
@@ -125,7 +155,7 @@ export default function LoginPage() {
             height={72}
             style={{
               position: 'absolute',
-              top: -200,
+              top: -160,
               left: '5%',
               // objectFit: 'contain',
               // borderRadius: 18,
@@ -141,18 +171,18 @@ export default function LoginPage() {
           fontWeight="bold"
           mb={1}
           align="center"
-          sx={{ letterSpacing: 1 }}
+          sx={{ letterSpacing: 1, textShadow: '0 2px 8px #fff9' }}
         >
-          Grow Something Legendary 🌱
+          {strings.loginPageTitle || 'Grow Something Legendary 🌱'}
         </Typography>
         <Typography
           variant="subtitle1"
           color="#1B3557"
           mb={3}
           align="center"
-          sx={{ opacity: 0.8, fontWeight: 500 }}
+          sx={{ opacity: 0.8, fontWeight: 500, textShadow: '0 2px 8px #fff9' }}
         >
-          Login to join the harvest.
+          {strings.loginPageSubtitle || 'Login to join the harvest.'}
         </Typography>
         <TextField
           type="tel"
@@ -160,7 +190,7 @@ export default function LoginPage() {
           fullWidth
           value={phone}
           onChange={(e) => validatePhone(e.target.value)}
-          placeholder="9123456789"
+          placeholder={strings.loginPagePhonePlaceholder || '9123456789'}
           InputProps={{
             startAdornment: (
               <InputAdornment
@@ -170,7 +200,7 @@ export default function LoginPage() {
                 +91
               </InputAdornment>
             ),
-            style: { background: 'rgba(255,255,255,0.95)', borderRadius: 8 },
+            style: { background: 'rgba(255,255,255,0.95)', borderRadius: 2 },
           }}
           sx={{
             mb: 3,
@@ -180,6 +210,9 @@ export default function LoginPage() {
               color: '#b0b0b0',
               opacity: 1,
             },
+            background: 'rgba(255,255,255,0.95)',
+            borderRadius: 2,
+            boxShadow: '0 2px 8px #0002',
           }}
           disabled={otpSent}
           onKeyDown={(e) => {
@@ -191,13 +224,19 @@ export default function LoginPage() {
         {otpSent && (
           <TextField
             type="tel"
-            label="OTP"
+            label={strings.loginPageOtpLabel || 'OTP'}
             value={otp}
-            onChange={(e) => setOtp(e.target.value)}
+            onChange={(e) => {
+              // Only allow numbers and max 6 digits for OTP
+              const numericOtp = e.target.value
+                .replace(/[^0-9]/g, '')
+                .slice(0, 6);
+              setOtp(numericOtp);
+            }}
             fullWidth
             sx={{ mb: 2 }}
             InputProps={{
-              style: { background: 'rgba(255,255,255,0.95)', borderRadius: 8 },
+              style: { background: 'rgba(255,255,255,0.95)', borderRadius: 2 },
             }}
             onKeyDown={(e) => {
               if (e.key === 'Enter' && otp.length === 6) {
@@ -219,11 +258,14 @@ export default function LoginPage() {
               borderRadius: 2,
               boxShadow: '0 2px 8px #3b82f655',
               letterSpacing: 1,
+              background: '#357a38',
+              color: '#fff',
+              mt: 2,
             }}
             onClick={handleSendOtp}
             disabled={!valid}
           >
-            Send OTP
+            {strings.loginPageSendOtp || 'Send OTP'}
           </Button>
         ) : (
           <Button
@@ -242,7 +284,7 @@ export default function LoginPage() {
             onClick={handleLogin}
             disabled={otp.length !== 6}
           >
-            Login
+            {strings.loginPageLoginBtn || 'Login'}
           </Button>
         )}
         <Typography
@@ -251,15 +293,33 @@ export default function LoginPage() {
           align="center"
           sx={{ opacity: 0.85, mt: 2 }}
         >
-          By clicking you agree to our{' '}
+          {strings.loginPageTerms || 'By clicking you agree to our'}{' '}
           <a href="#" style={{ color: '#2563eb', textDecoration: 'underline' }}>
-            Terms of Service
+            {strings.loginPageTermsOfService || 'Terms of Service'}
           </a>{' '}
           &{' '}
           <a href="#" style={{ color: '#2563eb', textDecoration: 'underline' }}>
-            Privacy Policy
+            {strings.loginPagePrivacyPolicy || 'Privacy Policy'}
           </a>
         </Typography>
+        <Box sx={{ width: '100%', textAlign: 'center', mt: 3 }}>
+          <a
+            href="/register"
+            style={{
+              color: '#1976d2',
+              textDecoration: 'underline',
+              fontWeight: 500,
+              fontSize: 18,
+              // background: 'rgba(255,255,255,0.85)',
+              borderRadius: 8,
+              padding: '6px 18px',
+              // boxShadow: '0 2px 8px #0001',
+              display: 'inline-block',
+            }}
+          >
+            {strings.loginPageRegisterLink || "Don't have an account? Register"}
+          </a>
+        </Box>
       </Box>
     </Box>
   );

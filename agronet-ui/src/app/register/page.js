@@ -8,6 +8,9 @@ import {
   Step,
   StepLabel,
   Paper,
+  FormControl,
+  Select,
+  MenuItem,
 } from '@mui/material';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
@@ -19,11 +22,16 @@ import FPOSection from './FPOSection';
 import KYCSection from './KYCSection';
 import BankSection from './BankSection';
 import Image from 'next/image';
-import Link from 'next/link';
-
-const steps = ['Personal Info', 'Address', 'FPO', 'Aadhar', 'Payment'];
+import { useLanguage } from '../hooks/useLanguage.js';
+import SideNav from '../components/SideNav';
+import PersonIcon from '@mui/icons-material/Person';
+import HomeIcon from '@mui/icons-material/Home';
+import GroupsIcon from '@mui/icons-material/Groups';
+import CreditCardIcon from '@mui/icons-material/CreditCard';
+import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
 
 export default function RegisterPage() {
+  const { strings, language, setLanguage } = useLanguage();
   const router = useRouter();
   // If user is already logged in via phone, get mobile from redux/auth
   const loggedInMobile = useSelector((state) => state.auth?.mobileNumber || '');
@@ -85,7 +93,13 @@ export default function RegisterPage() {
   };
   const handleBack = () => setActiveStep((prev) => prev - 1);
   const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    let newValue = value;
+    // Only allow numbers for mobile, pincode, aadhar
+    if (['mobile', 'pincode', 'aadhar'].includes(name)) {
+      newValue = newValue.replace(/[^0-9]/g, '');
+    }
+    setForm({ ...form, [name]: newValue });
   };
   const handleSkip = () => {
     setCompleted({ ...completed, [activeStep]: false });
@@ -96,6 +110,22 @@ export default function RegisterPage() {
     alert('Registration complete!');
     router.push('/dashboard');
   };
+
+  const steps = [
+    strings.registerStepPersonalInfo,
+    strings.registerStepAddress,
+    strings.registerStepFPO,
+    strings.registerStepAadhar,
+    strings.registerStepPayment,
+  ];
+
+  const sectionDescriptions = [
+    strings.registerSectionPersonalInfoDesc,
+    strings.registerSectionAddressDesc,
+    strings.registerSectionFPODesc,
+    strings.registerSectionAadharDesc,
+    strings.registerSectionPaymentDesc,
+  ];
 
   const sectionCards = [
     {
@@ -120,17 +150,17 @@ export default function RegisterPage() {
     },
   ];
 
-  const sectionDescriptions = [
-    'Enter your personal details to get started. Mobile number is required for registration.',
-    'Add your delivery address now or skip and add it later during order placement.',
-    'If you are part of an FPO, enter your association details. Otherwise, skip this step.',
-    'Provide your Aadhar number for KYC. This is required to place orders, but can be added later.',
-    'Add your UPI ID for payments. You can add or edit this later during checkout.',
-  ];
-
   const handleStepClick = (idx) => {
     setActiveStep(idx);
   };
+
+  const stepIcons = [
+    PersonIcon,
+    HomeIcon,
+    GroupsIcon,
+    CreditCardIcon,
+    AccountBalanceWalletIcon,
+  ];
 
   return (
     <Box
@@ -144,6 +174,40 @@ export default function RegisterPage() {
         position: 'relative',
       }}
     >
+      {/* Logo at the top left */}
+      <Box sx={{ position: 'absolute', top: 18, left: 18, zIndex: 10 }}>
+        <Image
+          src="/assets/images/gmclogo.svg"
+          alt="GMC AgroNet Logo"
+          width={152}
+          height={72}
+          style={{ objectFit: 'contain' }}
+          priority
+        />
+      </Box>
+      {/* Language dropdown at top right */}
+      <Box sx={{ position: 'absolute', top: 18, right: 18, zIndex: 10 }}>
+        <FormControl
+          size="small"
+          sx={{
+            minWidth: 120,
+            bgcolor: 'white',
+            borderRadius: 2,
+            boxShadow: 1,
+          }}
+        >
+          <Select
+            value={language}
+            onChange={(e) => setLanguage(e.target.value)}
+            displayEmpty
+            inputProps={{ 'aria-label': 'Language' }}
+          >
+            <MenuItem value="en">{strings.English || 'English'}</MenuItem>
+            <MenuItem value="te">{strings.Telugu || 'Telugu'}</MenuItem>
+          </Select>
+        </FormControl>
+      </Box>
+      {/* Overlay for darkening the background image */}
       <Box
         sx={{
           position: 'absolute',
@@ -152,23 +216,6 @@ export default function RegisterPage() {
           zIndex: 1,
         }}
       />
-      <Box
-        sx={{
-          position: 'absolute',
-          top: 32,
-          left: '50%',
-          transform: 'translateX(-50%)',
-          zIndex: 2,
-        }}
-      >
-        <Image
-          src="/assets/images/gmclogo.svg"
-          alt="GMC AgroNet Logo"
-          width={160}
-          height={48}
-          style={{ objectFit: 'contain' }}
-        />
-      </Box>
       <Paper
         elevation={3}
         sx={{
@@ -195,7 +242,7 @@ export default function RegisterPage() {
             align="center"
             sx={{ letterSpacing: 0.5, paddingBottom: 4 }}
           >
-            Registration
+            {strings.registerPageTitle}
           </Typography>
         </Box>
         <Stepper
@@ -203,24 +250,52 @@ export default function RegisterPage() {
           alternativeLabel
           sx={{ mb: 2, width: '100%' }}
         >
-          {steps.map((label, idx) => (
-            <Step key={label} completed={!!completed[idx]}>
-              <StepLabel
-                onClick={() => handleStepClick(idx)}
-                sx={{
-                  cursor: 'pointer',
-                  '& .MuiStepLabel-label': {
-                    color: idx === activeStep ? '#357a38' : undefined,
-                    fontWeight: idx === activeStep ? 700 : 500,
-                    textDecoration:
-                      idx !== activeStep ? 'underline dotted' : 'none',
-                  },
-                }}
-              >
-                {label}
-              </StepLabel>
-            </Step>
-          ))}
+          {steps.map((label, idx) => {
+            const Icon = stepIcons[idx];
+            return (
+              <Step key={label} completed={!!completed[idx]}>
+                <StepLabel
+                  StepIconComponent={(props) => (
+                    <Box
+                      sx={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        bgcolor:
+                          props.active || props.completed
+                            ? '#357a38'
+                            : '#e0e0e0',
+                        color:
+                          props.active || props.completed ? 'white' : '#757575',
+                        borderRadius: '50%',
+                        width: 36,
+                        height: 36,
+                        boxShadow: props.active
+                          ? '0 0 0 4px #c8e6c9'
+                          : undefined,
+                        transition: 'all 0.2s',
+                        fontSize: 0,
+                      }}
+                    >
+                      <Icon sx={{ fontSize: 22 }} />
+                    </Box>
+                  )}
+                  onClick={() => handleStepClick(idx)}
+                  sx={{
+                    cursor: 'pointer',
+                    '& .MuiStepLabel-label': {
+                      color: idx === activeStep ? '#357a38' : undefined,
+                      fontWeight: idx === activeStep ? 700 : 500,
+                      textDecoration:
+                        idx !== activeStep ? 'underline dotted' : 'none',
+                    },
+                  }}
+                >
+                  {label}
+                </StepLabel>
+              </Step>
+            );
+          })}
         </Stepper>
         <Typography
           variant="subtitle1"
@@ -283,7 +358,7 @@ export default function RegisterPage() {
             disabled={activeStep === 0}
             sx={{ minWidth: 110 }}
           >
-            Back
+            {strings.registerBtnBack}
           </Button>
           {activeStep < steps.length - 1 && (
             <>
@@ -292,7 +367,7 @@ export default function RegisterPage() {
                 onClick={handleNext}
                 sx={{ ml: 2, minWidth: 110 }}
               >
-                Next
+                {strings.registerBtnNext}
               </Button>
               {(activeStep === 1 ||
                 activeStep === 2 ||
@@ -303,7 +378,7 @@ export default function RegisterPage() {
                   sx={{ ml: 1, minWidth: 110 }}
                   color="secondary"
                 >
-                  Skip
+                  {strings.registerBtnSkip}
                 </Button>
               )}
             </>
@@ -315,22 +390,28 @@ export default function RegisterPage() {
               onClick={handleSubmit}
               sx={{ minWidth: 110 }}
             >
-              Finish
+              {strings.registerBtnFinish}
             </Button>
           )}
         </Box>
-        <div style={{ width: '100%', marginTop: 24, textAlign: 'center' }}>
-          <Link
+        <Box sx={{ width: '100%', textAlign: 'center', mt: 2, mb: 1 }}>
+          <a
             href="/login"
             style={{
               color: '#1976d2',
               textDecoration: 'underline',
               fontWeight: 500,
+              fontSize: 18,
+              // background: 'rgba(255,255,255,0.85)',
+              borderRadius: 8,
+              padding: '6px 18px',
+              // boxShadow: '0 2px 8px #0001',
+              display: 'inline-block',
             }}
           >
-            Already have an account? Login
-          </Link>
-        </div>
+            {strings.registerLoginLink}
+          </a>
+        </Box>
       </Paper>
     </Box>
   );

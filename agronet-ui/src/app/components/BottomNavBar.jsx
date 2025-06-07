@@ -51,7 +51,7 @@ const BottomNavBar = ({ isLoggedIn }) => {
             }} />
           )}
           {isLoggedIn && (
-            <BottomNavigationAction label={strings.bottomNavInputs} icon={<AgricultureIcon />} onClick={() => router.push('/mycrop')} sx={{
+            <BottomNavigationAction label={strings.bottomNavCrops} icon={<AgricultureIcon />} onClick={() => router.push('/mycrop')} sx={{
               borderRadius: 2,
               transition: 'box-shadow 0.2s, transform 0.15s',
               '&:active': {
