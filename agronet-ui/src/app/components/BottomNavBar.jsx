@@ -8,14 +8,12 @@ import ListAltIcon from '@mui/icons-material/ListAlt';
 import PersonIcon from '@mui/icons-material/Person';
 import AgricultureIcon from '@mui/icons-material/Agriculture';
 import { useRouter } from 'next/navigation';
-import { useSelector } from 'react-redux';
 import { useLanguage } from '../hooks/useLanguage.js';
 
 
-const BottomNavBar = () => { 
+const BottomNavBar = ({ isLoggedIn }) => { 
     const { strings } = useLanguage();
     const router = useRouter();
-    const isLoggedIn = useSelector(state => state.auth.isLoggedIn);
     return <Box
         sx={{
           position: 'fixed',
@@ -65,26 +63,21 @@ const BottomNavBar = () => {
               },
             }} />
           )}
-          <BottomNavigationAction label={strings.bottomNavProfile} icon={<PersonIcon />} onClick={() => {
-  if (isLoggedIn) {
-    router.push('/profile');
-  } else {
-    // Optionally, trigger login dialog if available
-    if (typeof window !== 'undefined') {
-      window.dispatchEvent(new CustomEvent('show-login-dialog'));
-    }
-  }
-}} sx={{
-  borderRadius: 2,
-  transition: 'box-shadow 0.2s, transform 0.15s',
-  '&:active': {
-    boxShadow: 8,
-    transform: 'scale(0.97) translateY(2px)',
-  },
-  '&:hover': {
-    boxShadow: 4,
-  },
-}} />
+          {isLoggedIn && (
+            <BottomNavigationAction label={strings.bottomNavProfile} icon={<PersonIcon />} onClick={() => {
+              router.push('/profile');
+            }} sx={{
+              borderRadius: 2,
+              transition: 'box-shadow 0.2s, transform 0.15s',
+              '&:active': {
+                boxShadow: 8,
+                transform: 'scale(0.97) translateY(2px)',
+              },
+              '&:hover': {
+                boxShadow: 4,
+              },
+            }} />
+          )}
           <BottomNavigationAction label={strings.bottomNavSupport} icon={<SupportAgentIcon />} sx={{
             borderRadius: 2,
             transition: 'box-shadow 0.2s, transform 0.15s',
