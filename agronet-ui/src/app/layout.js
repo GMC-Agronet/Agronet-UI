@@ -88,9 +88,8 @@ function AppProviders({ children }) {
 }
 
 function LayoutContent({ children }) {
-  const params = useParams();
-  const pathname =
-    typeof window !== 'undefined' ? window.location.pathname : '';
+  // Use Next.js usePathname hook for client-safe pathname
+  const pathname = usePathname();
   const [componentKey, setComponentKey] = React.useState('home');
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const router = useRouter();
@@ -101,40 +100,27 @@ function LayoutContent({ children }) {
     [],
   );
 
-  React.useEffect(() => {
-    if (params && params.component) {
-      setComponentKey(params.component);
-    }
-  }, [params]);
-
   // Determine if BottomNavBar should be shown
   const showBottomNav =
-    typeof window !== 'undefined'
-      ? !(pathname === '/landing' || pathname === '/' || pathname === '/login')
-      : true;
+    pathname &&
+    !(pathname === '/landing' || pathname === '/' || pathname === '/login');
 
   // Optionally, block rendering of protected content if not logged in
-  const isProtected =
-    typeof window !== 'undefined' &&
-    protectedRoutes.some((r) => pathname === r);
+  const isProtected = pathname && protectedRoutes.some((r) => pathname === r);
 
   // Only show login dialog if on a protected route and not logged in
   React.useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const path = window.location.pathname;
-      if (!isLoggedIn && protectedRoutes.some((r) => path === r)) {
-        setShowLoginDialog(true);
-      } else {
-        setShowLoginDialog(false);
-      }
+    if (!isLoggedIn && isProtected) {
+      setShowLoginDialog(true);
+    } else {
+      setShowLoginDialog(false);
     }
-  }, [isLoggedIn, router, pathname, protectedRoutes]);
+  }, [isLoggedIn, isProtected]);
 
   // Fix: If login dialog is open and user cancels, redirect to a safe public page (dashboard)
   const handleLoginDialogClose = () => {
     setShowLoginDialog(false);
     if (isProtected && !isLoggedIn) {
-      // Instead of router.push, use window.location.replace to force reload
       window.location.replace('/dashboard');
     }
   };
@@ -166,11 +152,9 @@ function LayoutContent({ children }) {
       <Box sx={{ pb: 8 }}>
         <Container componentKey={componentKey}>
           {/* Only block protected content if on exact protected route and not logged in */}
-          {!isLoggedIn && protectedRoutes.some((r) => pathname === r)
-            ? null
-            : children}
+          {!isLoggedIn && isProtected ? null : children}
         </Container>
-        {showBottomNav && <BottomNavBar />}
+        {showBottomNav && <BottomNavBar isLoggedIn={isLoggedIn} />}
       </Box>
       <Dialog open={showLoginDialog} onClose={handleLoginDialogClose}>
         <DialogTitle>Login Required</DialogTitle>
